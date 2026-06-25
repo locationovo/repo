@@ -32,10 +32,10 @@ jobs:
           FIRST_LAST=$(git rev-list --max-count=1 HEAD)
           SECOND_LAST=$(git rev-list --max-count=2 HEAD | tail -1)
 
-          git reflog expire --expire=now --all
-          git gc --prune=now
-
           git checkout --orphan temp_branch "$SECOND_LAST"
+          git branch -D "$BRANCH"
+          git reflog expire --expire=now --all
+          git gc --prune=now --aggressive
           git add .
           git -c core.compression=0 commit -m "Squashed history base"
           git cherry-pick --allow-empty "$FIRST_LAST"
