@@ -1,0 +1,47 @@
+name: Clean Git History
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean-history:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Keep only last 2 commits
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          TOTAL=$(git rev-list --count HEAD)
+
+          if [ "$TOTAL" -le 2 ]; then
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          FIRST_LAST=$(git rev-list --max-count=1 HEAD)
+          SECOND_LAST=$(git rev-list --max-count=2 HEAD | tail -1)
+
+          git reflog expire --expire=now --all
+          git gc --prune=now
+
+          git checkout --orphan temp_branch "$SECOND_LAST"
+          git add .
+          git -c core.compression=0 commit -m "Squashed history base"
+          git cherry-pick --allow-empty "$FIRST_LAST"
+          git branch -M "$BRANCH"
+          git reflog expire --expire=now --all
+          git gc --aggressive --prune=now
+
+      - name: Force push
+        run: git push --force origin HEAD

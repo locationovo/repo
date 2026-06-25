@@ -1,0 +1,50 @@
+name: Update Repo Index
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dpkg-dev
+        run: sudo apt-get update && sudo apt-get install -y dpkg-dev
+
+      - name: Generate package index
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          DEBS_DIR="./debs"
+
+          if [ ! -d "${DEBS_DIR}" ]; then
+            echo "[ERROR] debs directory not found"
+            exit 1
+          fi
+
+          if ! ls -- "${DEBS_DIR}"/*.deb >/dev/null 2>&1; then
+            echo "[ERROR] No .deb files found in ${DEBS_DIR}"
+            exit 1
+          fi
+
+          if ! command -v dpkg-scanpackages >/dev/null 2>&1; then
+            echo "[ERROR] dpkg-scanpackages not found"
+            exit 1
+          fi
+
+          dpkg-scanpackages -m "${DEBS_DIR}" /dev/null > Packages
+          sed -i 's/^Architecture: iphoneos-arm$/Architecture: iphoneos-arm64/' Packages
+          gzip -9 -f -k Packages
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Packages Packages.gz
+          git diff --staged --quiet || git commit -m "Update package index"
+          git push origin HEAD
