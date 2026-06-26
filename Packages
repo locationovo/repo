@@ -30438,7 +30438,7 @@ Architecture: iphoneos-arm64
 Maintainer: Sam Bingner <maintainer@sbdhi.com>
 Installed-Size: 736
 Conflicts: com.mc.xz
-Filename: ./debs/lzma_2:4.32.7-2_iphoneos-arm_rootless.deb
+Filename: ./debs/lzma_2_4.32.7-2_iphoneos-arm_rootless.deb
 Size: 69930
 MD5sum: 31d304172b109340f5cc60f9bb5b1a6a
 SHA1: b286111eabd262032f24549d36516cd8534d0899
@@ -30455,7 +30455,7 @@ Architecture: iphoneos-arm64
 Maintainer: Sam Bingner <maintainer@sbdhi.com>
 Installed-Size: 736
 Conflicts: com.mc.xz
-Filename: ./debs/lzma_2_4.32.7-2_iphoneos-arm_rootless.deb
+Filename: ./debs/lzma_2:4.32.7-2_iphoneos-arm_rootless.deb
 Size: 69930
 MD5sum: 31d304172b109340f5cc60f9bb5b1a6a
 SHA1: b286111eabd262032f24549d36516cd8534d0899
