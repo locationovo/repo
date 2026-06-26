@@ -1,4 +1,4 @@
-name: Update Index
+name: Update Repo Index
 
 on:
   workflow_dispatch:
@@ -47,5 +47,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git reset
           git add Packages Packages.gz
-          git diff --staged --quiet || git commit -m "Update package index"
+          git commit --allow-empty -m "Update package index"
           git push origin HEAD
