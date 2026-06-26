@@ -5,47 +5,40 @@ on:
 
 jobs:
   update-index:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     permissions:
       contents: write
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install dpkg-dev
-        run: sudo apt-get update && sudo apt-get install -y dpkg-dev
+      - name: Install dpkg
+        run: brew install dpkg
 
       - name: Generate package index
         shell: bash
         run: |
           set -euo pipefail
 
-          DEBS_DIR="./debs"
+          SCAN_DIR="./debs"
+          OUTPUT="Packages"
 
-          if [ ! -d "${DEBS_DIR}" ]; then
-            echo "debs directory not found"
-            exit 1
-          fi
+          [[ -d "$SCAN_DIR" ]] || { echo "debs directory not found"; exit 1; }
+          ls "$SCAN_DIR"/*.deb >/dev/null 2>&1 || { echo "No .deb files found in $SCAN_DIR"; exit 1; }
+          command -v dpkg-scanpackages >/dev/null || { echo "dpkg-scanpackages not found"; exit 1; }
 
-          if ! ls -- "${DEBS_DIR}"/*.deb >/dev/null 2>&1; then
-            echo "No .deb files found in ${DEBS_DIR}"
-            exit 1
-          fi
+          dpkg-scanpackages -m "$SCAN_DIR" /dev/null > "$OUTPUT" 2>/dev/null
+          sed -i '' 's/^Architecture: iphoneos-arm$/Architecture: iphoneos-arm64/' "$OUTPUT"
+          gzip -9fk "$OUTPUT"
+          bzip2 -9fk "$OUTPUT"
 
-          if ! command -v dpkg-scanpackages >/dev/null 2>&1; then
-            echo "dpkg-scanpackages not found"
-            exit 1
-          fi
-
-          dpkg-scanpackages -m "${DEBS_DIR}" /dev/null > Packages 2>/dev/null
-          sed -i 's/^Architecture: iphoneos-arm$/Architecture: iphoneos-arm64/' Packages
-          gzip -9 -f -k Packages
+          echo "Packages, Packages.gz, Packages.bz2 已全量覆盖更新"
 
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git reset
-          git add Packages Packages.gz
+          git add Packages Packages.gz Packages.bz2
           git commit --allow-empty -m "Update package index"
           git push origin HEAD
