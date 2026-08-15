@@ -1,0 +1,263 @@
+name: Fetch and Convert Procursus Rootful to Rootless (Full)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: macos-latest
+    timeout-minutes: 360
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          BREW_PREFIX="$(brew --prefix)"
+          echo "[INFO] Brew prefix: ${BREW_PREFIX}"
+
+          brew install bash 2>&1 || true
+          BASH_BIN="${BREW_PREFIX}/bin/bash"
+          if [ -x "$BASH_BIN" ]; then
+            echo "[INFO] bash: ${BASH_BIN}"
+          else
+            BASH_BIN="/bin/bash"
+          fi
+          echo "BASH_BIN=${BASH_BIN}" >> "${GITHUB_ENV}"
+
+          echo "[INFO] Installing dpkg..."
+          brew install dpkg 2>&1
+
+          echo "[INFO] Installing ldid..."
+          brew install ldid 2>&1
+
+          PATCHER_URL="https://github.com/NightwindDev/rootless-patcher/releases/download/0.0.1/com.nightwind.rootless-patcher_0.0.1.pkg"
+          PATCHER_PKG="/tmp/rootless-patcher.pkg"
+          curl -sL --max-time 120 --retry 3 -o "${PATCHER_PKG}" "${PATCHER_URL}"
+
+          if [ ! -s "${PATCHER_PKG}" ]; then
+            echo "[FATAL] Failed to download rootless-patcher"
+            exit 1
+          fi
+
+          mkdir -p /tmp/patcher_extract
+          pkgutil --expand-full "${PATCHER_PKG}" /tmp/patcher_extract 2>/dev/null || {
+            brew install xar 2>&1 || true
+            mkdir -p /tmp/patcher_payload && cd /tmp/patcher_payload
+            xar -xf "${PATCHER_PKG}" 2>/dev/null || true
+            if [ -f "Payload" ]; then
+              tar -xf Payload -C /tmp/patcher_extract 2>/dev/null || \
+              cat Payload | gunzip -dc | cpio -i -D /tmp/patcher_extract 2>/dev/null || true
+            fi
+          }
+
+          find /tmp/patcher_extract -type f -name "rootless-patcher" -exec cp {} "${BREW_PREFIX}/bin/" \; 2>/dev/null || true
+          chmod +x "${BREW_PREFIX}/bin/rootless-patcher" 2>/dev/null || true
+
+          echo "==================== Verification ===================="
+          echo "[INFO] rootless-patcher: $(which rootless-patcher)"
+          echo "[INFO] dpkg-deb: $(which dpkg-deb)"
+          echo "======================================================"
+
+          if ! command -v rootless-patcher &>/dev/null; then
+            echo "[FATAL] rootless-patcher not found"
+            exit 1
+          fi
+          if ! command -v dpkg-deb &>/dev/null; then
+            echo "[FATAL] dpkg-deb not found"
+            exit 1
+          fi
+
+      - name: Fetch and convert
+        timeout-minutes: 350
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+
+          BASH_BIN="${BASH_BIN:-/bin/bash}"
+          if [ ! -x "$BASH_BIN" ]; then
+            BASH_BIN="/bin/bash"
+          fi
+
+          exec "$BASH_BIN" <<'INNER_SCRIPT'
+          set -euo pipefail
+          shopt -s nullglob
+
+          BASE_URL="https://apt.procurs.us"
+          POOL_VERSIONS="1700 1800 1900"
+          DEBS_DIR="${GITHUB_WORKSPACE}/debs"
+          FAILED_LOG="${GITHUB_WORKSPACE}/failed_packages.txt"
+          DEBUG_LOG="${GITHUB_WORKSPACE}/debug_log.txt"
+          MAX_FILE_SIZE=52428800
+
+          mkdir -p "${DEBS_DIR}" /tmp/dl
+          > "${FAILED_LOG}"
+          > "${DEBUG_LOG}"
+
+          log() {
+            local level="$1"; shift
+            local msg="[$(date +%H:%M:%S)] [${level}] $*"
+            echo "${msg}"
+            echo "${msg}" >> "${DEBUG_LOG}"
+          }
+
+          TOTAL_DONE=0
+          TOTAL_FAIL=0
+          TOTAL_CONV=0
+          TOTAL_OVERSIZE=0
+          START_TIME=$(date +%s)
+          MAX_TIME=16200
+
+          log "INFO" "Bash: ${BASH_VERSION}"
+          log "INFO" "dpkg-deb: $(which dpkg-deb)"
+          log "INFO" "rootless-patcher: $(which rootless-patcher)"
+          log "INFO" "Pools: ${POOL_VERSIONS}"
+          log "INFO" "Mode: FULL (convert only, no index generation)"
+
+          for VER in $POOL_VERSIONS; do
+            log "INFO" "=== Pool: ${VER} ==="
+            POOL_URL="${BASE_URL}/pool/main/iphoneos-arm64/${VER}/"
+            HTML=$(curl -sL --max-time 30 --retry 2 "${POOL_URL}" 2>>"${DEBUG_LOG}" || true)
+            if [ -z "$HTML" ]; then
+              log "WARN" "No response from ${POOL_URL}"
+              continue
+            fi
+
+            mapfile -t DEB_ARRAY < <(echo "$HTML" | grep -oE 'href="[^"]+\.deb"' | sed 's/href="//;s/"//' | sort -u)
+            TOTAL=${#DEB_ARRAY[@]}
+            if [[ "$TOTAL" -eq 0 ]]; then
+              log "WARN" "No deb files in pool ${VER}"
+              continue
+            fi
+            log "INFO" "${TOTAL} packages found"
+
+            for deb_name in "${DEB_ARRAY[@]}"; do
+              ELAPSED=$(( $(date +%s) - START_TIME ))
+              if [[ "$ELAPSED" -ge "$MAX_TIME" ]]; then
+                log "INFO" "Time limit reached: ${ELAPSED}s"
+                break
+              fi
+
+              TOTAL_DONE=$((TOTAL_DONE + 1))
+              output_name="${deb_name%.deb}_rootless.deb"
+              OUTPUT_PATH="${DEBS_DIR}/${output_name}"
+
+              log "INFO" "[${TOTAL_DONE}] ${deb_name}"
+
+              HTTP_CODE=$(curl -sL --max-time 120 --retry 2 -o "/tmp/dl/${deb_name}" -w "%{http_code}" "${POOL_URL}${deb_name}" 2>>"${DEBUG_LOG}" || echo "000")
+              DL_SIZE=$(stat -f%z "/tmp/dl/${deb_name}" 2>/dev/null || echo 0)
+
+              if [ "$HTTP_CODE" != "200" ] || [ "$DL_SIZE" -le 1024 ]; then
+                log "FAIL" "Download failed (HTTP ${HTTP_CODE}, ${DL_SIZE} bytes)"
+                TOTAL_FAIL=$((TOTAL_FAIL + 1))
+                echo "${VER}/${deb_name} | download_fail | HTTP ${HTTP_CODE} | ${DL_SIZE}" >> "${FAILED_LOG}"
+                rm -f "/tmp/dl/${deb_name}"
+                continue
+              fi
+
+              log "INFO" "Downloaded ${DL_SIZE} bytes"
+
+              if [ "$DL_SIZE" -gt "$MAX_FILE_SIZE" ]; then
+                log "SKIP" "File too large: ${DL_SIZE} bytes (max: ${MAX_FILE_SIZE})"
+                TOTAL_OVERSIZE=$((TOTAL_OVERSIZE + 1))
+                echo "${VER}/${deb_name} | oversize | ${DL_SIZE}" >> "${FAILED_LOG}"
+                rm -f "/tmp/dl/${deb_name}"
+                continue
+              fi
+
+              ORIG_HASH=$(shasum -a 256 "/tmp/dl/${deb_name}" | awk '{print $1}')
+
+              SNAPSHOT="/tmp/snapshot_$$.txt"
+              > "$SNAPSHOT"
+              while IFS= read -r -d '' f; do
+                h=$(shasum -a 256 "$f" | awk '{print $1}')
+                echo "${f}|${h}" >> "$SNAPSHOT"
+              done < <(find /tmp/dl -maxdepth 1 -name "*.deb" -print0 2>/dev/null)
+
+              PATCHER_OUTPUT=$(rootless-patcher "/tmp/dl/${deb_name}" 2>&1) || true
+              PATCHER_EXIT=$?
+              if [ -n "${PATCHER_OUTPUT}" ]; then
+                log "INFO" "Patcher: ${PATCHER_OUTPUT}"
+              fi
+              if [ "${PATCHER_EXIT}" != "0" ]; then
+                log "WARN" "Patcher exit: ${PATCHER_EXIT}"
+              fi
+
+              FOUND_NEW=""
+              while IFS= read -r -d '' f; do
+                NEW_HASH=$(shasum -a 256 "$f" | awk '{print $1}')
+                OLD_HASH=$(grep -F "${f}|" "$SNAPSHOT" 2>/dev/null | cut -d'|' -f2 || echo "")
+                if [ -z "$OLD_HASH" ]; then
+                  FOUND_NEW="$f"
+                  break
+                elif [ "$OLD_HASH" != "$NEW_HASH" ]; then
+                  FOUND_NEW="$f"
+                  break
+                fi
+              done < <(find /tmp/dl -maxdepth 1 -name "*.deb" -print0 2>/dev/null)
+
+              rm -f "$SNAPSHOT"
+
+              if [ -n "${FOUND_NEW}" ] && [ -s "${FOUND_NEW}" ]; then
+                NEW_HASH=$(shasum -a 256 "${FOUND_NEW}" | awk '{print $1}')
+                if [ "${ORIG_HASH}" != "${NEW_HASH}" ]; then
+                  cp "${FOUND_NEW}" "${OUTPUT_PATH}" 2>/dev/null
+                else
+                  cp "/tmp/dl/${deb_name}" "${OUTPUT_PATH}" 2>/dev/null
+                fi
+                rm -f "${FOUND_NEW}"
+              else
+                log "INFO" "No new file from patcher, copying original"
+                cp "/tmp/dl/${deb_name}" "${OUTPUT_PATH}" 2>/dev/null
+              fi
+
+              OUT_SIZE=$(stat -f%z "${OUTPUT_PATH}" 2>/dev/null || echo 0)
+              OUT_HASH=$(shasum -a 256 "${OUTPUT_PATH}" | awk '{print $1}')
+
+              if [ "${OUT_SIZE}" -gt 1024 ]; then
+                TOTAL_CONV=$((TOTAL_CONV + 1))
+                if [ "${ORIG_HASH}" = "${OUT_HASH}" ]; then
+                  log "OK" "-> ${output_name} (${OUT_SIZE} bytes, unmodified)"
+                else
+                  log "OK" "-> ${output_name} (${OUT_SIZE} bytes, patched)"
+                fi
+              else
+                TOTAL_FAIL=$((TOTAL_FAIL + 1))
+                log "FAIL" "Output too small: ${OUT_SIZE} bytes"
+                echo "${VER}/${deb_name} | output_too_small | ${OUT_SIZE}" >> "${FAILED_LOG}"
+                rm -f "${OUTPUT_PATH}"
+              fi
+
+              rm -f "/tmp/dl/${deb_name}"
+            done
+
+            log "INFO" "Pool ${VER} done: ${TOTAL_CONV} conv, ${TOTAL_FAIL} fail, ${TOTAL_OVERSIZE} oversize"
+          done
+
+          ELAPSED=$(( $(date +%s) - START_TIME ))
+          log "INFO" "=== Complete: ${ELAPSED}s ==="
+          log "INFO" "Total: ${TOTAL_CONV} converted, ${TOTAL_FAIL} failed, ${TOTAL_OVERSIZE} oversize"
+          INNER_SCRIPT
+
+      - name: Push results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add debs/ failed_packages.txt debug_log.txt 2>/dev/null || true
+          if git diff --cached --quiet 2>/dev/null; then
+            echo "[INFO] No changes to push"
+          else
+            git commit -m "Update procursus converted debs $(date +%Y%m%d-%H%M)"
+            git push
+            echo "[INFO] Pushed successfully"
+          fi
