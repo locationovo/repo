@@ -3,6 +3,13 @@ name: Update Repo Index
 on:
   workflow_dispatch:
 
+env:
+
+  AUX_REPOS: |
+    repo-extra
+    # repo-extra2
+    # another-owner/repo-extra3
+
 jobs:
   update-index:
     runs-on: macos-latest
@@ -15,24 +22,124 @@ jobs:
       - name: Install dpkg
         run: brew install dpkg
 
-      - name: Generate package index
+      - name: Generate main package index
         shell: bash
         run: |
           set -euo pipefail
 
           SCAN_DIR="./debs"
-          OUTPUT="Packages"
+          OUTPUT="Packages_main"
 
           [[ -d "$SCAN_DIR" ]] || { echo "debs directory not found"; exit 1; }
           ls "$SCAN_DIR"/*.deb >/dev/null 2>&1 || { echo "No .deb files found in $SCAN_DIR"; exit 1; }
           command -v dpkg-scanpackages >/dev/null || { echo "dpkg-scanpackages not found"; exit 1; }
 
           dpkg-scanpackages -m "$SCAN_DIR" /dev/null > "$OUTPUT" 2>/dev/null
+          echo "[INFO]生成主仓库索引: $OUTPUT"
+
+      - name: Process auxiliary repositories
+        shell: bash
+        env:
+          MAIN_OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+
+          > Packages_aux
+
+          TOTAL=0
+          SUCCESS=0
+          SKIPPED=0
+
+          while IFS= read -r line; do
+            line=$(echo "$line" | sed 's/:space:]]*//;s/[[:space:]]*$//')
+
+            [[ -z "$line" || "$line" == \#* ]] && continue
+
+            TOTAL=$((TOTAL + 1))
+
+            if [[ "$line" == */* ]]; then
+              AUX_OWNER="${line%/*}"
+              AUX_REPO="${line##*/}"
+            else
+              AUX_OWNER="$MAIN_OWNER"
+              AUX_REPO="$line"
+            fi
+
+            echo ""
+            echo "========== 处理辅助仓库[$TOTAL]: $AUX_OWNER/$AUX_REPO =========="
+
+            CLONE_DIR="aux-repo-${TOTAL}"
+            REPO_URL="https://github.com/${AUX_OWNER}/${AUX_REPO}.git"
+            PAGES_URL="https://${AUX_OWNER}.github.io/${AUX_REPO}/debs"
+            TEMP_INDEX="Packages_aux_${TOTAL}"
+
+            echo "[INFO]克隆: $REPO_URL"
+            if ! git clone --depth 1 --single-branch "$REPO_URL" "$CLONE_DIR" 2>/dev/null; then
+              echo "[WARN]克隆失败 跳过 $AUX_OWNER/$AUX_REPO"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+            echo "成功"
+
+            DEBS_DIR="$CLONE_DIR/debs"
+            if [[ ! -d "$DEBS_DIR" ]]; then
+              echo "[WARN]未找到deb包目录 跳过$AUX_OWNER/$AUX_REPO"
+              rm -rf "$CLONE_DIR"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+
+            DEB_COUNT=$(find "$DEBS_DIR" -maxdepth 1 -name "*.deb" 2>/dev/null | wc -l | tr -d ' ')
+            if [[ "$DEB_COUNT" -eq 0 ]]; then
+              echo "[WARN]deb包目录为空 跳过$AUX_OWNER/$AUX_REPO"
+              rm -rf "$CLONE_DIR"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+
+            echo "[INFO]正在为$DEB_COUNT个包生成索引..."
+            if ! dpkg-scanpackages -m "$DEBS_DIR" /dev/null "$PAGES_URL" > "$TEMP_INDEX" 2>/dev/null; then
+              echo "[WARN]索引生成失败 跳过$AUX_OWNER/$AUX_REPO"
+              rm -rf "$CLONE_DIR" "$TEMP_INDEX"
+              SKIPPED=$((SKIPPED + 1))
+              continue
+            fi
+
+            cat "$TEMP_INDEX" >> Packages_aux
+
+            rm -rf "$CLONE_DIR" "$TEMP_INDEX"
+
+            echo "[INFO]完成 $AUX_OWNER/$AUX_REPO ($DEB_COUNT个包)"
+            SUCCESS=$((SUCCESS + 1))
+
+          done <<< "$AUX_REPOS"
+
+          echo ""
+          echo "=========================================="
+          echo "[INFO]辅助仓库共$TOTAL个 成功$SUCCESS个 跳过$SKIPPED个"
+          echo "=========================================="
+
+          if [[ ! -f Packages_aux ]]; then
+            touch Packages_aux
+          fi
+
+      - name: Merge and finalize
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          OUTPUT="Packages"
+
+          cat Packages_main Packages_aux > "$OUTPUT"
+
           sed -i '' 's/^Architecture: iphoneos-arm$/Architecture: iphoneos-arm64/' "$OUTPUT"
+
           gzip -9fk "$OUTPUT"
           bzip2 -9fk "$OUTPUT"
 
-          echo "Packages, Packages.gz, Packages.bz2 已全量覆盖更新"
+          rm -f Packages_main Packages_aux
+
+          echo "索引已全量覆盖更新（with gz and bz2）"
 
       - name: Commit and push
         run: |
