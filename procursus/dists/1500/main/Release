@@ -6,10 +6,10 @@ Codename: ios
 Architectures: iphoneos-arm64
 Components: main
 MD5Sum:
- 2f5628deed598be2c67871bfb5bd2de1 192181 main/binary-iphoneos-arm64/Packages
- 8606b014582998d4c1405caf4bc6ac05 22646 main/binary-iphoneos-arm64/Packages.gz
- cbecb2eadf2ddc4cafb05b5aedd7bdfa 19093 main/binary-iphoneos-arm64/Packages.bz2
+ 2219d9f1e3de67dcd6d5d35fbd90916f 192554 main/binary-iphoneos-arm64/Packages
+ 2a95d66a2d976259fe433b92bad36d88 22719 main/binary-iphoneos-arm64/Packages.gz
+ 88ff403ee37f2ede3ac755942ce95b02 19192 main/binary-iphoneos-arm64/Packages.bz2
 SHA256:
- 05c32de542cc7e73e199cb8eef6e73ee9531a1810ac0ef40d67d442753d41531 192181 main/binary-iphoneos-arm64/Packages
- ca23f9409f0b4aef66131ce695dd37faf46865cf9d5ea468b44ff5abe6aeaa63 22646 main/binary-iphoneos-arm64/Packages.gz
- 477feeda100b9c2a8ef574e7f9372dac04d6fb8739590656c8278e61783a4768 19093 main/binary-iphoneos-arm64/Packages.bz2
+ 68ea362888967b544290c037aea4d7d4917b007a1bd36d8c50e01119d5eb105a 192554 main/binary-iphoneos-arm64/Packages
+ a1492a2ee2d64105a503015e974df3e2de22bd099f4380a2450478eccf01bde3 22719 main/binary-iphoneos-arm64/Packages.gz
+ 82de63d2571407ff09b6fa8797f21b0d9df96b302a116c1fe395250401de97b3 19192 main/binary-iphoneos-arm64/Packages.bz2

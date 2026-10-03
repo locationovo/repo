@@ -4825,6 +4825,16 @@ Homepage: https://mackyle.github.io/xar/
 Description: eXtensible ARchive format
 Filename: https://apt.procurs.us/pool/main/iphoneos-arm64/1500/xar//xar_1.8.0.487.100.1_iphoneos-arm.deb
 
+Package: xpwn
+Version: 0.5.8+git20220711.c89fba5
+Architecture: iphoneos-arm64
+Maintainer: Procursus Team <support@procurs.us>
+Depends: libssl3, libpng16-16
+Section: Development
+Priority: optional
+Description: portable, barebones PwnageTool implementation
+Filename: https://apt.procurs.us/pool/main/iphoneos-arm64/1500/xpwn//xpwn_0.5.8+git20220711.c89fba5_iphoneos-arm.deb
+
 Package: libxxhash-dev
 Version: 0.8.2
 Architecture: iphoneos-arm64
