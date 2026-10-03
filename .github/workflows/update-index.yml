@@ -1,0 +1,249 @@
+name: Update Repo Index
+
+on:
+  workflow_dispatch:
+
+env:
+  AUX_REPOS: |
+    repo-extra
+    # another-owner/repo-extra2
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dpkg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev
+
+      - name: Scan main pool
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; YLW='\033[1;33m'; N='\033[0m'
+          SCAN_DIR="./pool"
+          RAW="Packages_main_raw"
+          > "$RAW"
+
+          if [[ ! -d "$SCAN_DIR" ]]; then
+            echo -e "${YLW}[!] pool directory not found, generating empty index${N}"
+          elif ! find "$SCAN_DIR" -name "*.deb" -print -quit 2>/dev/null | grep -q .; then
+            echo -e "${YLW}[!] No debs in pool, generating empty index${N}"
+          else
+            echo -e "${GRY}[>] Scanning pool${N}"
+            dpkg-scanpackages -m "$SCAN_DIR" /dev/null 2>/dev/null > "$RAW" || true
+            sed -i -E "s|^Filename: .*/pool/|Filename: ../../../../pool/|" "$RAW" 2>/dev/null || true
+          fi
+
+      - name: Process auxiliary repos
+        shell: bash
+        env:
+          MAIN_OWNER: ${{ github.repository_owner }}
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; YLW='\033[1;33m'; N='\033[0m'
+          > Packages_aux
+          > aux_packages_list.txt
+          TOTAL=0; SUCCESS=0; SKIPPED=0
+
+          while IFS= read -r line; do
+            line=$(echo "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            [[ -z "$line" || "$line" == \#* ]] && continue
+            TOTAL=$((TOTAL+1))
+
+            if [[ "$line" == */* ]]; then
+              AUX_OWNER="${line%/*}"; AUX_REPO="${line##*/}"
+            else
+              AUX_OWNER="$MAIN_OWNER"; AUX_REPO="$line"
+            fi
+
+            echo -e "${GRY}[>] Aux repo ${TOTAL}: ${AUX_OWNER}/${AUX_REPO}${N}"
+            CLONE_DIR="aux-repo-${TOTAL}"
+            REPO_URL="https://github.com/${AUX_OWNER}/${AUX_REPO}.git"
+            BASE_PAGES="https://${AUX_OWNER}.github.io/${AUX_REPO}"
+
+            if ! git clone --depth 1 --single-branch "$REPO_URL" "$CLONE_DIR" 2>/dev/null; then
+              echo -e "${YLW}[!] Clone failed, skip${N}"
+              SKIPPED=$((SKIPPED+1)); continue
+            fi
+
+            SCAN_TARGET=""
+            URL_PREFIX=""
+            if [[ -d "$CLONE_DIR/pool" ]] && find "$CLONE_DIR/pool" -name "*.deb" -print -quit 2>/dev/null | grep -q .; then
+              SCAN_TARGET="$CLONE_DIR/pool"
+              URL_PREFIX="${BASE_PAGES}/pool/"
+            elif [[ -d "$CLONE_DIR/debs" ]] && find "$CLONE_DIR/debs" -name "*.deb" -print -quit 2>/dev/null | grep -q .; then
+              echo -e "  ${GRY}=> No pool, falling back to debs${N}"
+              SCAN_TARGET="$CLONE_DIR/debs"
+              URL_PREFIX="${BASE_PAGES}/debs/"
+            else
+              echo -e "${YLW}[!] No valid debs found in aux repo, skip${N}"
+              rm -rf "$CLONE_DIR"; SKIPPED=$((SKIPPED+1)); continue
+            fi
+
+            DEB_COUNT=$(find "$SCAN_TARGET" -name "*.deb" | wc -l | tr -d ' ')
+            echo -e "  ${GRY}=> Scanning ${DEB_COUNT} packages${N}"
+
+            if ! dpkg-scanpackages -m "$SCAN_TARGET" /dev/null > "Packages_aux_${TOTAL}" 2>/dev/null; then
+              echo -e "${YLW}[!] Index generation failed, skip${N}"
+              rm -rf "$CLONE_DIR" "Packages_aux_${TOTAL}"; SKIPPED=$((SKIPPED+1)); continue
+            fi
+
+            sed -i -E "s|^Filename: .*/(pool|debs)/|Filename: ${URL_PREFIX}|" "Packages_aux_${TOTAL}" 2>/dev/null || true
+            echo "Packages_aux_${TOTAL}" >> aux_packages_list.txt
+            rm -rf "$CLONE_DIR"
+            echo -e "  ${GRN}✓${N} ${AUX_OWNER}/${AUX_REPO} (${DEB_COUNT} packages)"
+            SUCCESS=$((SUCCESS+1))
+          done <<< "$AUX_REPOS"
+          echo -e "${GRY}=> Aux summary: ${TOTAL} total, ${SUCCESS} success, ${SKIPPED} skipped${N}"
+
+      - name: Merge and build structured repo
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; YLW='\033[1;33m'; N='\033[0m'
+
+          python3 - <<'PYEOF'
+          import os, gzip, bz2, hashlib, re, time
+
+          GRY='\033[0;37m'; GRN='\033[0;32m'; N='\033[0m'
+
+          def parse_packages(path):
+              if not os.path.exists(path): return []
+              with open(path, encoding='utf-8', errors='ignore') as f:
+                  content = f.read()
+              pkgs = []
+              for para in re.split(r'\n\s*\n', content.strip()):
+                  if not para.strip(): continue
+                  d = {}
+                  for line in para.splitlines():
+                      if ':' in line:
+                          k, v = line.split(':', 1)
+                          d[k.strip()] = v.strip()
+                  if 'Package' in d and 'Architecture' in d:
+                      pkgs.append(d)
+              return pkgs
+
+          main_pkgs = parse_packages('Packages_main_raw')
+          print(f"{GRY}[>]{N} Loaded {len(main_pkgs)} packages from main")
+
+          aux_pkgs = []
+          if os.path.exists('aux_packages_list.txt'):
+              with open('aux_packages_list.txt') as f:
+                  for af in f:
+                      af = af.strip()
+                      if af: aux_pkgs.extend(parse_packages(af))
+          print(f"{GRY}=>{N} Loaded {len(aux_pkgs)} packages from aux")
+
+          seen = set(); final = []
+          for p in main_pkgs + aux_pkgs:
+              key = (p.get('Package',''), p.get('Architecture',''))
+              if key not in seen:
+                  seen.add(key); final.append(p)
+
+          arch_groups = {}
+          for p in final:
+              arch_groups.setdefault(p.get('Architecture','unknown'), []).append(p)
+
+          base = 'dists/stable/main'
+          os.makedirs(base, exist_ok=True)
+          arch_list = sorted(arch_groups.keys())
+
+          if not arch_list:
+              print(f"{GRY}=>{N} No packages found, generating empty index")
+              os.makedirs(os.path.join(base, 'binary-iphoneos-arm64'), exist_ok=True)
+              open(os.path.join(base, 'binary-iphoneos-arm64', 'Packages'), 'w').close()
+              arch_list = ['iphoneos-arm64']
+          else:
+              for arch in arch_list:
+                  pkgs = arch_groups[arch]
+                  arch_dir = os.path.join(base, f'binary-{arch}')
+                  os.makedirs(arch_dir, exist_ok=True)
+                  out = os.path.join(arch_dir, 'Packages')
+                  with open(out, 'w', encoding='utf-8') as f:
+                      for p in pkgs:
+                          for k, v in p.items():
+                              f.write(f"{k}: {v}\n")
+                          f.write("\n")
+                  with open(out, 'rb') as fh:
+                      data = fh.read()
+                  with gzip.open(out + '.gz', 'wb', compresslevel=9) as gz: gz.write(data)
+                  with bz2.open(out + '.bz2', 'wb', compresslevel=9) as bz: bz.write(data)
+                  print(f"{GRY}=>{N} Wrote {len(pkgs)} packages for {arch}")
+
+          meta_content = ""
+          if os.path.exists('Release.base'):
+              with open('Release.base', 'r', encoding='utf-8') as f:
+                  meta_content = f.read().rstrip() + "\n"
+          else:
+              meta_content = (
+                  "Origin: Personal Repo\n"
+                  "Label: Personal Repo\n"
+                  "Suite: stable\n"
+                  "Version: 1.0\n"
+                  "Codename: ios\n"
+                  "Components: main\n"
+                  "Description: Personal structured repo\n"
+              )
+
+          date_str = time.strftime("%a, %d %b %Y %H:%M:%S +0000", time.gmtime())
+
+          with open('dists/stable/Release', 'w', encoding='utf-8') as f:
+              f.write(meta_content)
+              f.write(f"Date: {date_str}\n")
+              f.write(f"Architectures: {' '.join(arch_list)}\n")
+              for alg in ('MD5Sum', 'SHA256'):
+                  f.write(f"{alg}:\n")
+                  for arch in arch_list:
+                      for ext in ('', '.gz', '.bz2'):
+                          rel = f"main/binary-{arch}/Packages{ext}"
+                          full = os.path.join('dists/stable', rel)
+                          if not os.path.exists(full): continue
+                          with open(full, 'rb') as fh:
+                              d = fh.read()
+                          h = hashlib.md5(d).hexdigest() if alg == 'MD5Sum' else hashlib.sha256(d).hexdigest()
+                          f.write(f" {h} {len(d)} {rel}\n")
+          print(f"{GRY}=>{N} Release generated with custom template, Date, Architectures, and checksums.")
+          PYEOF
+          echo -e "  ${GRN}✓${N} Index finalized"
+
+      - name: GPG Sign Release
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; N='\033[0m'
+
+          echo -e "${GRY}[>] Importing GPG key${N}"
+          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --import --batch --yes 2>/dev/null
+
+          echo -e "  ${GRY}=> Generating InRelease${N}"
+          gpg --default-key "${{ secrets.GPG_KEY_ID }}" --batch --yes --clearsign \
+            -o dists/stable/InRelease dists/stable/Release
+
+          echo -e "  ${GRY}=> Generating Release.gpg${N}"
+          gpg --default-key "${{ secrets.GPG_KEY_ID }}" --batch --yes -abs \
+            -o dists/stable/Release.gpg dists/stable/Release
+
+          echo -e "  ${GRN}✓${N} GPG signature generated"
+
+      - name: Commit and push
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; N='\033[0m'
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          rm -f Packages_main_raw Packages_aux_* aux_packages_list.txt
+          git add dists/ key.gpg Release.base 2>/dev/null || true
+          if git diff --cached --quiet 2>/dev/null; then
+            echo -e "${GRY}[>]${N} No changes to push"
+          else
+            git commit -m "Update structured repo index"
+            git push origin HEAD
+            echo -e "${GRN}✓${N} Pushed successfully"
+          fi

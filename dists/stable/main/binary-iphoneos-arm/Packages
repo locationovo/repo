@@ -1,0 +1,14 @@
+Package: com.unknown.ff
+Version: 0.1.8-c51f201
+Architecture: iphoneos-arm
+Maintainer: unknown
+Filename: aux-repo-1/debs/com.unknown.ff_0.1.8-c51f201_iphoneos-arm-rootful.deb
+Size: 480584
+MD5sum: fdfc3529f9517e3b6e28127f793fd7f3
+SHA1: bd78a6eafeb1caf2d060148e859c5a4f8e86f2d2
+SHA256: 783dfd61800aa8c2b990c3a79e059cbbc98bc133c96c4fd8cbe1f3cc76b73d78
+Section: utils
+Priority: optional
+Description: Find Files (ff) utility recursively searches the files whose names match the specified RegExp pattern in the provided directory (defaults to the current directory if not provided).
+Name: ff
+

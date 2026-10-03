@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>帮助 - Repo</title>
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+}
+.wrapper {
+    width: 100%;
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+.header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+.back-btn {
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--btn-border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    transition: border-color .15s, background .15s;
+}
+.back-btn:hover {
+    border-color: var(--btn-hover-border);
+    background: var(--btn-hover-bg);
+}
+.faq-item {
+    background: var(--card-bg);
+    border-radius: 14px;
+    padding: 22px 24px;
+    box-shadow: var(--card-shadow);
+}
+.faq-item h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+}
+.faq-item p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+.faq-item p:last-child { margin-bottom: 0; }
+.faq-item ul {
+    padding-left: 20px;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+.faq-item ul li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <div class="header">
+        <h1>常见问题</h1>
+        <a href="index.html" class="back-btn">返回主页</a>
+    </div>
+
+    <div class="faq-item">
+        <h2>Q: 为什么不支持 Cydia？</h2>
+        <p>A: 本源采用现代 APT 高级源结构（Structured Repository），并使用了 GPG 签名保护。Cydia 的设计较为陈旧，存在以下兼容性问题：</p>
+        <ul>
+            <li>Cydia 无法自动识别并导入本源的公钥（<code>key.gpg</code>），会提示“未签名”或“签名无效”。</li>
+            <li>Cydia 对 <code>dists/stable/main/binary-iphoneos-arm64/</code> 等结构化目录的解析极不稳定，容易刷新失败。</li>
+            <li>Cydia 已多年未更新，对新设备和新越狱环境（如 rootless、roothide）的支持很差。</li>
+        </ul>
+        <p>建议使用 <strong>Irisin</strong> 或 <strong>Sileo</strong> 等现代包管理器，它们能完美支持本源的签名和高级源结构。</p>
+    </div>
+
+    <div class="faq-item">
+        <h2>Q: 如何添加本插件源？</h2>
+        <p>A: 点击主页上对应的按钮即可一键添加：</p>
+        <ul>
+            <li><strong>Irisin</strong>：点击后会自动打开添加面板，确认即可。</li>
+            <li><strong>Sileo</strong>：点击后会跳转到 Sileo 的添加页面，确认即可。</li>
+            <li>也可以点击“复制源地址”，然后在包管理器中手动粘贴添加。</li>
+        </ul>
+    </div>
+
+    <div class="faq-item">
+        <h2>Q: 为什么刷新源很慢或失败？</h2>
+        <p>A: 本源的索引托管在 GitHub Pages（<code>*.github.io</code>）。由于该域名在国内直连不稳定，建议：</p>
+        <ul>
+            <li>开启代理，并将 <code>*.github.io</code> 加入代理规则。</li>
+            <li>若使用 Irisin，可在设置中适当调大源的超时时间。</li>
+        </ul>
+    </div>
+
+    <div class="faq-item">
+        <h2>Q: 镜像源和主源有什么区别？</h2>
+        <p>A: 主源包含我维护的插件；Procursus 和 Bingner 镜像是重建的历史索引，仅用于研究目的，不存储原始 <code>.deb</code> 文件，安装时直连官方源。</p>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+Origin: locationovo's repo
+Label: locationovo's repo
+Suite: stable
+Version: 1.0
+Codename: ios
+Components: main
+Description: 个人插件源，我的自定义插件和搬运插件，以及Procursus和Bingner的旧版rootful源的镜像
+ Personal repo, containing my custom tweaks, ported tweaks, and mirrors of historic rootful Procursus and Bingner repositories.
+Date: Sat, 03 Oct 2026 06:28:04 +0000
+Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
+MD5Sum:
+ 8ccd0eecbab8e02dc61f1e3f9cabc3e2 586 main/binary-iphoneos-arm/Packages
+ 9072c9202ad732b5572733723b9fb2d4 418 main/binary-iphoneos-arm/Packages.gz
+ ad394927501fda7b4181e9d3ed123922 451 main/binary-iphoneos-arm/Packages.bz2
+ fc540722e72597339b2f0af4e366d73e 6535 main/binary-iphoneos-arm64/Packages
+ 56076cd97caff784189e2ad42198551d 1947 main/binary-iphoneos-arm64/Packages.gz
+ d7f56aa4e12b9aaccbab51f723206432 1985 main/binary-iphoneos-arm64/Packages.bz2
+ 02595d0f09de5a5d497a438d91247fbf 6559 main/binary-iphoneos-arm64e/Packages
+ 9cf9d3ef0e929275bb0aa4ce7c8dc71a 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 64d0780bfacfbf2a08cb67e7a07a497e 1989 main/binary-iphoneos-arm64e/Packages.bz2
+SHA256:
+ 674a7e7e1f55e1d6f26a0d9e2750d4995afc1b2673fb6287e013e70331ef901f 586 main/binary-iphoneos-arm/Packages
+ e6d3ea448d48d83d5e636b4eb2755592d1151086f0ab1c729db21e76d5e485c7 418 main/binary-iphoneos-arm/Packages.gz
+ 845c8d905ee98a31780ad325bbcca1fe72d4ff5a5111594c735e119a2e8455de 451 main/binary-iphoneos-arm/Packages.bz2
+ 0e5ad04d3b5036484f5aa6b5181c9d26914d11efd0a886324a4229a0854e5a25 6535 main/binary-iphoneos-arm64/Packages
+ c5b82406244430c0371e51a0fee00111a93e21c45596eaec28eb2ebf1e169edd 1947 main/binary-iphoneos-arm64/Packages.gz
+ 180419e5f748855898bc53e671e8a843181576f09b379df8591bdde52a900402 1985 main/binary-iphoneos-arm64/Packages.bz2
+ 245de79d0117d6f71dbad6f1c7346841529b8f5a08b06c951d45e7c74277eba3 6559 main/binary-iphoneos-arm64e/Packages
+ e81a9582876075c4b50924874b96f309a34b78e5cc76c555dbdbf9ad5480f54f 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 8524a700dc10acb4ef33d8a23bbd78b27f3a8b70c0a3651dec01b43587f38efc 1989 main/binary-iphoneos-arm64e/Packages.bz2

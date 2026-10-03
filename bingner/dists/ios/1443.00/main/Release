@@ -1,0 +1,15 @@
+Origin: Bingner
+Label: Bingner Mirror (iphoneos-arm64)
+Suite: 1443.00
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm64
+Components: main
+MD5Sum:
+ 4957f179b15e4faf1f4a2be656d33f9c 328639 main/binary-iphoneos-arm64/Packages
+ 72da13a7d80d526e3fa7b323028cc42f 79775 main/binary-iphoneos-arm64/Packages.gz
+ 8a777e2afeb481a7f8b0733c6cb78b41 63293 main/binary-iphoneos-arm64/Packages.bz2
+SHA256:
+ 428583d94155c86cfa6f0c8ed07f37897bca4aa58357633fa091a3a2d1a6e937 328639 main/binary-iphoneos-arm64/Packages
+ b21b00cac1fd4e4cce9e9121c3be0adf4d3c518ea7166664c6a36197fd8460db 79775 main/binary-iphoneos-arm64/Packages.gz
+ 75105806df6501d31a84583df239dab20c10919644dcbb7b2d6d484407c960fa 63293 main/binary-iphoneos-arm64/Packages.bz2

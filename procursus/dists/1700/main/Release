@@ -1,0 +1,15 @@
+Origin: Procursus
+Label: Procursus Historic (iphoneos-arm64)
+Suite: 1700
+Version: 1.0
+Codename: ios
+Architectures: iphoneos-arm64
+Components: main
+MD5Sum:
+ 1289749b986d61bad0ace2784b0747d0 233389 main/binary-iphoneos-arm64/Packages
+ 32085f264b759375935464bcefea5808 27381 main/binary-iphoneos-arm64/Packages.gz
+ 6fe5df23ab467a603e31ad2df746bb10 23122 main/binary-iphoneos-arm64/Packages.bz2
+SHA256:
+ 56c38d78700b022ed9a98800f83f15c5af4de7a7528c4befd210421699446194 233389 main/binary-iphoneos-arm64/Packages
+ 1be0e3b3b66f2f1b1a80c711f638d3a2992e6b74a77dec8aa68dc78f0f8beed8 27381 main/binary-iphoneos-arm64/Packages.gz
+ 12a379ce96bd362a1f36f55aeb40a97cb827eebb19d4f2fb5c684e74feb3cd33 23122 main/binary-iphoneos-arm64/Packages.bz2

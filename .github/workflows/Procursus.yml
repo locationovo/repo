@@ -1,0 +1,186 @@
+name: Mirror Procursus Historic Indices
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install dpkg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y dpkg-dev
+
+      - name: Collect deb list
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; N='\033[0m'
+          BASE="https://apt.procurs.us/pool/main/iphoneos-arm64"
+          VERSIONS="1500 1600 1700"
+          LIST="${GITHUB_WORKSPACE}/tasks.txt"
+          > "${LIST}"
+
+          for VER in $VERSIONS; do
+            echo -e "${GRY}[>] Listing ${VER}${N}"
+            HTML=$(curl -fsSL --max-time 60 "${BASE}/${VER}/" 2>/dev/null || true)
+            SUBS=$(echo "$HTML" | grep -oE '>[a-zA-Z0-9._+-]+/</a>' | sed 's/>//;s/<\/a>//' | grep -v '^\.\.$' | sort -u || true)
+            for SUB in $SUBS; do
+              SUBHTML=$(curl -fsSL --max-time 30 "${BASE}/${VER}/${SUB}/" 2>/dev/null || true)
+              DEBS=$(echo "$SUBHTML" | grep -oE '[a-zA-Z0-9._+-]+\.deb' | sort -u || true)
+              for FN in $DEBS; do
+                echo "${VER}|${SUB}|${FN}"
+              done >> "${LIST}"
+            done
+          done
+          echo -e "\033[0;32m✓\033[0m Total tasks: $(wc -l < ${LIST})"
+
+      - name: Fetch control fields in parallel
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; N='\033[0m'
+          WORK="${GITHUB_WORKSPACE}/work"
+          mkdir -p "${WORK}"
+          JOBS=$(nproc)
+          echo -e "${GRY}[>] Parallel workers: ${JOBS}${N}"
+
+          cat > "${WORK}/worker.sh" <<'WORKER'
+          #!/bin/bash
+          set -euo pipefail
+          IFS='|' read -r VER SUB FN <<< "$1"
+          BASE="https://apt.procurs.us/pool/main/iphoneos-arm64"
+          URL="${BASE}/${VER}/${SUB}/${FN}"
+          WORK="${GITHUB_WORKSPACE}/work"
+          IDX=$(printf '%05d' "$2")
+          OUT="${WORK}/ctrl_${VER}_${IDX}"
+          LOCAL="/tmp/${IDX}_${FN}"
+          if ! curl -fsSL --max-time 60 --retry 2 "${URL}" -o "${LOCAL}" 2>/dev/null; then
+            rm -f "${LOCAL}"
+            exit 0
+          fi
+          CONTROL=$(dpkg-deb -f "${LOCAL}" 2>/dev/null || true)
+          rm -f "${LOCAL}"
+          [[ -z "$CONTROL" ]] && exit 0
+          {
+            echo "$CONTROL" \
+              | grep -E '^(Package|Version|Architecture|Depends|Pre-Depends|Conflicts|Provides|Replaces|Recommends|Suggests|Section|Priority|Maintainer|Author|Name|Description|Homepage|Depiction|Icon):' \
+              | sed 's/^Architecture: .*/Architecture: iphoneos-arm64/'
+            echo "Filename: ${URL}"
+            echo ""
+          } > "${OUT}"
+          WORKER
+          chmod +x "${WORK}/worker.sh"
+
+          awk '{print $0 " " NR}' "${GITHUB_WORKSPACE}/tasks.txt" \
+            | xargs -P "${JOBS}" -d '\n' -I {} bash -c '"${GITHUB_WORKSPACE}/work/worker.sh" $(echo "{}" | awk "{print \$0}")' || true
+          echo -e "${GRN}✓${N} Fetched $(ls ${WORK}/ctrl_* 2>/dev/null | wc -l) control files"
+
+      - name: Merge and publish
+        shell: bash
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; YLW='\033[1;33m'; N='\033[0m'
+          WORK="${GITHUB_WORKSPACE}/work"
+          OUT="${GITHUB_WORKSPACE}/procursus"
+          VERSIONS="1500 1600 1700"
+
+          for VER in $VERSIONS; do
+            echo -e "${GRY}[>] Merging ${VER}${N}"
+            DIR="${OUT}/dists/${VER}/main/binary-iphoneos-arm64"
+            PKG="${DIR}/Packages"
+            mkdir -p "${DIR}"
+            cat "${WORK}"/ctrl_${VER}_* 2>/dev/null > "${PKG}" || true
+            LINES=$(grep -c '^Package:' "${PKG}" || true)
+            if [[ "$LINES" -eq 0 ]]; then
+              echo -e "  ${YLW}[!] empty, skip${N}"
+              rm -rf "${DIR}"
+              continue
+            fi
+            gzip -9fk "${PKG}"
+            bzip2 -9fk "${PKG}"
+            cd "${DIR}"
+            SZ=$(stat -c%s Packages);   M=$(md5sum Packages | cut -d' ' -f1);     S=$(sha256sum Packages | cut -d' ' -f1)
+            GZ=$(stat -c%s Packages.gz); GM=$(md5sum Packages.gz | cut -d' ' -f1); GS=$(sha256sum Packages.gz | cut -d' ' -f1)
+            BZ=$(stat -c%s Packages.bz2);BM=$(md5sum Packages.bz2 | cut -d' ' -f1);BS=$(sha256sum Packages.bz2 | cut -d' ' -f1)
+            cat > ../Release <<EOF
+          Origin: Procursus
+          Label: Procursus Historic (iphoneos-arm64)
+          Suite: ${VER}
+          Version: 1.0
+          Codename: ios
+          Architectures: iphoneos-arm64
+          Components: main
+          MD5Sum:
+           ${M} ${SZ} main/binary-iphoneos-arm64/Packages
+           ${GM} ${GZ} main/binary-iphoneos-arm64/Packages.gz
+           ${BM} ${BZ} main/binary-iphoneos-arm64/Packages.bz2
+          SHA256:
+           ${S} ${SZ} main/binary-iphoneos-arm64/Packages
+           ${GS} ${GZ} main/binary-iphoneos-arm64/Packages.gz
+           ${BS} ${BZ} main/binary-iphoneos-arm64/Packages.bz2
+          EOF
+            cd "${GITHUB_WORKSPACE}"
+            echo -e "  ${GRN}✓${N} ${VER}: ${LINES} packages"
+          done
+          rm -rf "${WORK}" "${GITHUB_WORKSPACE}/tasks.txt"
+
+      - name: GPG Sign Release
+        shell: bash
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        run: |
+          set -euo pipefail
+          GRY='\033[0;37m'; GRN='\033[0;32m'; YLW='\033[1;33m'; N='\033[0m'
+          if [ -z "$GPG_PRIVATE_KEY" ]; then
+            echo -e "${YLW}[!] GPG_PRIVATE_KEY not set, skipping signing${N}"
+            exit 0
+          fi
+          echo -e "${GRY}[>] Importing GPG key${N}"
+          echo "$GPG_PRIVATE_KEY" | gpg --import --batch --yes 2>/dev/null
+          for VER in 1500 1600 1700; do
+            if [ -f "procursus/dists/${VER}/Release" ]; then
+              echo -e "  ${GRY}=> Signing Procursus ${VER}${N}"
+              gpg --default-key "$GPG_KEY_ID" --batch --yes --clearsign \
+                -o "procursus/dists/${VER}/InRelease" "procursus/dists/${VER}/Release"
+              gpg --default-key "$GPG_KEY_ID" --batch --yes -abs \
+                -o "procursus/dists/${VER}/Release.gpg" "procursus/dists/${VER}/Release"
+            fi
+          done
+          echo -e "  ${GRN}✓${N} GPG signatures generated"
+
+      - name: Generate manifest
+        shell: bash
+        run: |
+          cd procursus
+          VERSIONS=$(cd dists 2>/dev/null && ls -1d */ 2>/dev/null | sed 's/\/$//' | sort -V || true)
+          JSON="["
+          FIRST=1
+          for v in $VERSIONS; do
+            if [ -f "dists/${v}/main/binary-iphoneos-arm64/Packages" ]; then
+              [ $FIRST -eq 0 ] && JSON="${JSON},"
+              JSON="${JSON}\"${v}\""
+              FIRST=0
+            fi
+          done
+          JSON="${JSON}]"
+          echo "{\"versions\":${JSON}}" > manifest.json
+          echo "manifest: $(cat manifest.json)"
+
+      - name: Push
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add procursus/ key.gpg 2>/dev/null || true
+          git diff --cached --quiet || { git commit -m "Mirror Procursus historic indices $(date +%Y%m%d-%H%M)"; git push; }

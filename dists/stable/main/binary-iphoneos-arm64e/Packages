@@ -1,0 +1,163 @@
+Package: com.locationovo.sdk.AppleTVOS10.2.sdk
+Version: 10.2
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.AppleTVOS10.2.sdk_10.2_iphoneos-arm64e.deb
+Size: 4812768
+MD5sum: 529e8394bae3cbc11a3fda0cd97630a9
+SHA1: a88c8aba8af911a5e72cae79f14810b1e1f93915
+SHA256: a8ff3b7c1f92f4592f10bbece6c66243400461e8c047b64a0f760fb72ddff28b
+Section: Development
+Description: AppleTVOS10.2.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: AppleTVOS10.2.sdk for Theos
+
+Package: com.locationovo.sdk.AppleTVOS11.4.sdk
+Version: 11.4
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.AppleTVOS11.4.sdk_11.4_iphoneos-arm64e.deb
+Size: 5426180
+MD5sum: d88e42743ad6c44bae39b59791e6be13
+SHA1: 34b4d9825d45b637873d8bc7282d8fb591241a0f
+SHA256: 6bdbf19e7630713e4078834d9f5875247ea1b794707da53595037a68d2706afc
+Section: Development
+Description: AppleTVOS11.4.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: AppleTVOS11.4.sdk for Theos
+
+Package: com.locationovo.sdk.AppleTVOS12.4.sdk
+Version: 12.4
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.AppleTVOS12.4.sdk_12.4_iphoneos-arm64e.deb
+Size: 5827064
+MD5sum: 111f5fb458bf2fabfd2c92a601fc3d92
+SHA1: 42eecff0c05a117e3670cf9504e0a3062273504c
+SHA256: f038b5af046c928f446dc12e78eaf41e5ed0927f1877a8659720d1567dc86efb
+Section: Development
+Description: AppleTVOS12.4.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: AppleTVOS12.4.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS10.3.sdk
+Version: 10.3
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS10.3.sdk_10.3_iphoneos-arm64e.deb
+Size: 7820712
+MD5sum: c02e5c4641be7394d86bf8344aca809c
+SHA1: 3d61234ad09cab08d436ff0e0a156a2dfd05bdd9
+SHA256: f446685d633bae07ac03ebfe5097c401ccd037f9abeef62ff469a621ce1c386d
+Section: Development
+Description: iPhoneOS10.3.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS10.3.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS11.4.sdk
+Version: 11.4
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS11.4.sdk_11.4_iphoneos-arm64e.deb
+Size: 6938264
+MD5sum: 3d56dad52b5cb94be62ae4ff37fcdd1a
+SHA1: 3b04a5358293482bbe03a38f0b213249bdfca8d6
+SHA256: 0fe5be84b8befc5ea7d08334d0905d673167da4a65f0d3c7acc497d3dd6595e2
+Section: Development
+Description: iPhoneOS11.4.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS11.4.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS12.4.sdk
+Version: 12.4
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS12.4.sdk_12.4_iphoneos-arm64e.deb
+Size: 9313600
+MD5sum: 0430a3c2b1f3ecb53532a2f2f5c1504e
+SHA1: 9fdc697a51d5840d17f8f77fda0f89cdd2364183
+SHA256: 13bc1297064b143bf309c446eb051acf14314433b996d70c14720d39b5e44aa0
+Section: Development
+Description: iPhoneOS12.4.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS12.4.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS13.7.sdk
+Version: 13.7
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS13.7.sdk_13.7_iphoneos-arm64e.deb
+Size: 8535272
+MD5sum: ea142b9dd71b4e467aae908e2dcdeacf
+SHA1: 98ebe6d5b88b26d2d4c2d281064d3fc9b651009e
+SHA256: 9f6ee31043329666dd74842676f9c75a81857abb8fe32c3fb0132efe6a616cc8
+Section: Development
+Description: iPhoneOS13.7.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS13.7.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS14.5.sdk
+Version: 14.5
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS14.5.sdk_14.5_iphoneos-arm64e.deb
+Size: 25319296
+MD5sum: 1bc88dcd0ad0b8d042e8890ae3ddcc1f
+SHA1: 8d5f946de5287045ef38fd168f314e38713f036e
+SHA256: 2f0c11fba8b8d5d53be2c3812367ee974fd1c5aa2a7e130e422a18370382f514
+Section: Development
+Description: iPhoneOS14.5.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS14.5.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS15.6.sdk
+Version: 15.6
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS15.6.sdk_15.6_iphoneos-arm64e.deb
+Size: 15456220
+MD5sum: c371a06d8e554f890440eda2d3a69316
+SHA1: 62d03265175dbc2afe9c556aa8dadf4117907698
+SHA256: 58277cb7990abb47286239ac7abc68f353f5513feef407b0fb5b32c5970aa7ef
+Section: Development
+Description: iPhoneOS15.6.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS15.6.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS16.5.sdk
+Version: 16.5
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS16.5.sdk_16.5_iphoneos-arm64e.deb
+Size: 34755648
+MD5sum: 5f5d843dc442ba1222bf5c35ea100aef
+SHA1: 5a206dd1a9afec2cecf2082abfe485c26beaf88e
+SHA256: 671874cfab27e5d95180fec83ba619c2e52785953217e07ec78b86d966d3deed
+Section: Development
+Description: iPhoneOS16.5.sdk for Theos development
+Name: iPhoneOS16.5.sdk for Theos
+
+Package: com.locationovo.sdk.iPhoneOS9.3.sdk
+Version: 9.3
+Architecture: iphoneos-arm64e
+Depends: com.theos.theos
+Filename: aux-repo-1/debs/com.locationovo.sdk.iPhoneOS9.3.sdk_9.3_iphoneos-arm64e.deb
+Size: 5618872
+MD5sum: e434acd43f5d23244e619118f3f2822e
+SHA1: 7d6a43aee2a1dd53694d7777160dfc0c55328d25
+SHA256: 044f55f1d3062d2ed6d65c416aee915c0e8ba289afbfa5ae00296a4d7b182974
+Section: Development
+Description: iPhoneOS9.3.sdk for Theos development,from https://github.com/theos/sdks/releases
+Name: iPhoneOS9.3.sdk for Theos
+
+Package: com.theos.theos
+Version: 2.5
+Architecture: iphoneos-arm64e
+Maintainer: locationovo <locationovo@outlook.com>
+Depends: firmware (>= 14.0), theos-dependencies
+Conflicts: org.theos.theos
+Replaces: org.theos.theos
+Filename: aux-repo-1/debs/com.theos.theos_2.5_iphoneos-arm64e.deb
+Size: 683944
+MD5sum: 9c5d87a032594e4fbfe9b737d8329e34
+SHA1: b275f323f175277518175277c364afb9ee3fbfdd
+SHA256: 7924480fa20a9b78947d72eae15c1359e0b169d4b8595aa88740d1bb3720d372
+Section: Development
+Homepage: https://theos.dev
+Description: The cross-platform build system for iOS tweak development
+Run nic.pl to create a new project, then make package to build debs. You can get the Complete source code from https: //gitHub.com/theos/theos
+Tag: role::developer
+Author: Theos Team
+Name: Theos
+

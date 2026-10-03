@@ -1,0 +1,8 @@
+Origin: locationovo's repo
+Label: locationovo's repo
+Suite: stable
+Version: 1.0
+Codename: ios
+Components: main
+Description: 个人插件源，我的自定义插件和搬运插件，以及Procursus和Bingner的旧版rootful源的镜像
+ Personal repo, containing my custom tweaks, ported tweaks, and mirrors of historic rootful Procursus and Bingner repositories.

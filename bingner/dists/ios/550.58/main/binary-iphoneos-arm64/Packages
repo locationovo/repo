@@ -1,0 +1,874 @@
+Package: apt-rdepends
+Version: 1.3.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 48
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libapt-pkg-perl
+Filename: debs/550.58/apt-rdepends_1.3.0-1_iphoneos-arm.deb
+Size: 6348
+MD5sum: 068146788694c1baf5588afceb3d8dcf
+SHA1: d1157a58b756abb5dab02a45d4b24f29593aa69f
+SHA256: 858167f632c6297b0529de6ea46ac63fb6655e2febf7c27148bfa7b1172844ba
+Section: Scripting
+Priority: optional
+Description: a Perl script that hooks into APT and recursively finds dependencies.
+Depiction: https://apt.bingner.com/info/apt-rdepends/
+Tag: purpose::console, role::hacker
+
+Package: ca-certificates
+Version: 0.0.1-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner
+Depends: firmware (>= 2.0)
+Conflicts: org.thebigboss.cacerts
+Replaces: org.thebigboss.cacerts
+Provides: org.thebigboss.cacerts
+Filename: debs/550.58/ca-certificates_0-1_all.deb
+Size: 134436
+MD5sum: 5d4744afecd3bd84d9921bfa8755f70e
+SHA1: 2887452fc6e3007ead9053e9afbcd5d6dc3ebf99
+SHA256: 1c90511fd002151b274c28e50adb8654ecf210a305a891557dcd7d235dd95cf1
+Section: Security
+Priority: important
+Multi-Arch: foreign
+Description: CA certs for curl, wget, git.
+Tag: purpose::console, role::hacker
+Depiction: https://apt.bingner.com/info/ca-certificates/
+Name: CA Certs
+
+Package: ca-certificates
+Version: 0.0.2
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner
+Depends: firmware (>= 2.0)
+Conflicts: org.thebigboss.cacerts, openssl (<< 1.0.2r)
+Replaces: org.thebigboss.cacerts
+Provides: org.thebigboss.cacerts
+Filename: debs/550.58/ca-certificates_0.0.2_all.deb
+Size: 125710
+MD5sum: c9e280b321aba40459c988eac9625957
+SHA1: 878696ce1037a53c58d3d75dfcf39507a942f18c
+SHA256: 29d3d0d5b09686f117a0402796f3f99224e30168e44178a49a78f504f3c84ba2
+Section: Security
+Priority: important
+Multi-Arch: foreign
+Description: CA certs for curl, wget, git.
+Tag: purpose::console, role::hacker
+Depiction: https://apt.bingner.com/info/ca-certificates/
+Name: CA Certs
+
+Package: ca-certificates
+Version: 20191031-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 464
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: firmware (>= 2.0)
+Filename: debs/550.58/ca-certificates_20191031-1_iphoneos-arm.deb
+Size: 120620
+MD5sum: f534920f0323c50de40480cccffffc50
+SHA1: ce4f8b70aaa6fcb17b9a570476a939eda9019bf3
+SHA256: f146ceee20490cc5703593cee0f6f01cd740e091507e8b876fc6a9bb154bce9e
+Section: Security
+Priority: important
+Description: Common CA certificates
+ Contains the certificate authorities shipped with Mozilla's browser to
+ allow SSL-based applications to check for the authenticity of SSL
+ connections.
+ .
+ Please note that Elucubratus can neither confirm nor deny whether the
+ certificate authorities whose certificates are included in this package
+ have in any way been audited for trustworthiness or RFC 3647
+ compliance.  Full responsibility to assess them belongs to the local
+ system administrator.
+Depiction: https://apt.bingner.com/info/ca-certificates/
+
+Package: com.bingner.plutil
+Version: 0.0.4
+Architecture: iphoneos-arm64
+Maintainer: Samuel Bingner
+Installed-Size: 256
+Depends: firmware (>=2.0)
+Conflicts: com.ericasadun.utilities
+Filename: debs/550.58/com.bingner.plutil_0.0.4_iphoneos-arm.deb
+Size: 47952
+MD5sum: 17a5d6802e0586ad1d458188b4c3b602
+SHA1: a21ef5ac3b9fa0bacf47c5b53b4f0429b989d068
+SHA256: faae988f28f6af7dc361b0742e68b2309d2b3c10a9bb25548a49e4ed6abc6a05
+Section: System
+Multi-Arch: foreign
+Description: plutil as from erica sadun
+Tag: role::hacker
+Author: Samuel Bingner
+Name: plutil
+
+Package: com.bingner.plutil
+Version: 0.1.0
+Architecture: iphoneos-arm64
+Maintainer: Samuel Bingner
+Installed-Size: 256
+Depends: firmware (>=2.0)
+Conflicts: com.ericasadun.utilities
+Filename: debs/550.58/com.bingner.plutil_0.1.0_iphoneos-arm.deb
+Size: 48220
+MD5sum: 1b53bd21bc041aa972e776c45c506afc
+SHA1: 554f77bfd67b35c5f60c0e8f8ff71758a50c36a1
+SHA256: bcf510275fd89e45832a12e1b0bf54d15b3d16ea2227ae0b5f5af9bfeb6ed0a4
+Section: System
+Multi-Arch: foreign
+Description: plutil as from erica sadun
+Tag: role::hacker
+Author: Samuel Bingner
+Name: plutil
+
+Package: coreutils
+Version: 8.31-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 16168
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: bash, coreutils-bin (>= 8.31), profile.d
+Replaces: netatalk (<= 2.0.3-6)
+Provides: md5sum, sha1sum
+Filename: debs/550.58/coreutils_8.31-1_iphoneos-arm.deb
+Size: 763446
+MD5sum: 6d4b95639e6c47ab5dca36ce3703515d
+SHA1: 5a94eee1378dcaaad98ea7279c929cf1cc47ee50
+SHA256: 08d263dab478d1b75b219d760f04a130867844ce545589be5d907a47f89a3b05
+Section: Utilities
+Priority: standard
+Homepage: http://www.gnu.org/software/coreutils/
+Description: core set of Unix shell utilities from GNU
+Depiction: https://apt.bingner.com/info/coreutils/
+Name: Core Utilities
+Tag: purpose::console, role::hacker
+
+Package: coreutils-bin
+Version: 8.31-1
+Architecture: iphoneos-arm64
+Essential: yes
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 6592
+Replaces: shell-cmds (<< 118-5), coreutils (<= 7.2-9)
+Provides: dirname, kill, mktemp, su
+Filename: debs/550.58/coreutils-bin_8.31-1_iphoneos-arm.deb
+Size: 745624
+MD5sum: 57fb73faecd6f2b4711ac969f5bf6bc6
+SHA1: 66d406059dec4b758f1f285d4874a5ca2db20621
+SHA256: cc0aef85c3fcdf44a0c53c462bc5b72a40c25aa359675283711f759d608a74de
+Section: Utilities
+Priority: required
+Homepage: http://www.gnu.org/software/coreutils/
+Description: just the /bin folder from GNU coreutils
+Depiction: https://apt.bingner.com/info/coreutils-bin/
+Name: Core Utilities (/bin)
+Tag: purpose::console, role::hacker
+
+Package: curl
+Version: 7.65.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1672
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssh2, libssl1.1.1, libnghttp2-14
+Filename: debs/550.58/curl_7.65.0-1_iphoneos-arm.deb
+Size: 317846
+MD5sum: 0669cb0c0b47f31b63c273772df70b16
+SHA1: 45ccaa019db7412c127e811a4d5ecb5f08e374b6
+SHA256: dbefdc177b9b191e13a99f3c0b1b94097e89a922fe90eb1b64923493c0ac70b6
+Section: Networking
+Priority: standard
+Homepage: http://curl.haxx.se/
+Description: flexible multi-protocol file transfers
+Depiction: https://apt.bingner.com/info/curl/
+Name: cURL
+Tag: purpose::console, role::hacker
+
+Package: cydia
+Version: 1.1.36+2.g0397a15
+Architecture: iphoneos-arm64
+Maintainer: Jay Freeman (saurik) <saurik@saurik.com>
+Installed-Size: 9768
+Pre-Depends: debianutils, dpkg (>= 1.16.1), firmware (>=5.0)
+Depends: cydia-lproj (>= 1.1.10), darwintools, debianutils, dpkg (>= 1.19.1), org.thebigboss.repo.icons, sed, shell-cmds, system-cmds, uikittools (>= 1.1.14), xz
+Conflicts: bigboss, bigbossbetarepo, com.sosiphone.addcydia, cydia-sources, ispazio.net, modmyifone, ste, yellowsn0w.com, zodttd
+Replaces: bigboss, bigbossbetarepo, com.sosiphone.addcydia, cydia-sources, ispazio.net, modmyifone, saurik, ste, yellowsn0w.com, zodttd
+Provides: bigbossbetarepo, cydia-sources
+Filename: debs/550.58/cydia_1.1.36+2.g0397a15_iphoneos-arm.deb
+Size: 1640746
+MD5sum: c735d967d5e7819864302ca54f4de8a0
+SHA1: f5a894ec369290f009dbd807685c34f029557ba4
+SHA256: e72e4029082febfc0eee744d5fe6046f4284f046662bff91940f84c9e8bf0acf
+Section: Packaging
+Priority: required
+Description: graphical iPhone front-end for APT
+Tag: purpose::uikit, cydia::essential, role::enduser
+Author: Jay Freeman (saurik) <saurik@saurik.com>
+Depiction: https://apt.bingner.com/info/cydia/
+Icon: file:///Applications/Cydia.app/Icon-60.png
+Name: Cydia Installer
+
+Package: dpkg
+Version: 1.19.7-1
+Architecture: iphoneos-arm64
+Essential: yes
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 3888
+Pre-Depends: tar (>= 1.23)
+Depends: bash, bzip2, coreutils-bin (>= 8.31), diffutils, file (>= 5.35) | firmware (<< 11.0), findutils, gzip, ldid (>= 2:2.1.1) | firmware (<< 11.0), lzma, tar, xz
+Filename: debs/550.58/dpkg_1.19.7-1_iphoneos-arm.deb
+Size: 505840
+MD5sum: 428eb33c80230d897278edaf81c47be3
+SHA1: 490703620544335c6efb614e30a6bd5ca885756d
+SHA256: 950bf7b6466c6b25d72bb7d171d6ab955b994c67f6e09d3f54db18466c420f4d
+Section: Packaging
+Priority: required
+Homepage: http://wiki.debian.org/Teams/Dpkg
+Description: package maintainance tools from Debian
+Depiction: https://apt.bingner.com/info/dpkg/
+Name: Debian Packager
+Tag: purpose::console, role::hacker
+
+Package: dpkg-perl
+Version: 1.18.25-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1848
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: dpkg, perl
+Filename: debs/550.58/dpkg-perl_1.18.25-1_iphoneos-arm.deb
+Size: 148828
+MD5sum: 03803c5aa59eb255787253f76b3cb3a3
+SHA1: bd075c31c8e7750f795ae5f4336de53e8c3a7385
+SHA256: 5a9ce390181eb3827069cdd566ba2749d4fbf91d2c5da53477db65b3689db425
+Section: Packaging
+Priority: optional
+Homepage: http://wiki.debian.org/Teams/Dpkg
+Description: perl-based package maintainance tools from Debian
+Depiction: https://apt.bingner.com/info/dpkg-perl/
+Name: Debian Packager (Perl)
+Tag: purpose::console, role::hacker
+
+Package: expat
+Version: 2.2.5-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 512
+Pre-Depends: dpkg (>= 1.14.25-8)
+Filename: debs/550.58/expat_2.2.5-1_iphoneos-arm.deb
+Size: 64924
+MD5sum: ce7b70e3a6687274ba212b193a58b5d5
+SHA1: 496c6437e6fd07483a727e3d21ebad6948967a22
+SHA256: f126f1d3be6f5abec90505d1372ce23e52acb113a27240689a5c51973992b1d3
+Section: Development
+Priority: standard
+Description: stream-oriented XML parser written in C
+Depiction: https://apt.bingner.com/info/expat/
+Name: XML Parser Toolkit
+Tag: purpose::library, role::developer
+
+Package: fakeroot
+Version: 1.20.2-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 232
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: shell-cmds (>= 118-8)
+Filename: debs/550.58/fakeroot_1.20.2-1_iphoneos-arm.deb
+Size: 20772
+MD5sum: 1c7f8acd92b960395923a9da88c68a67
+SHA1: ae0494111e6c5d290b7b53f86cab2cc0384db3bd
+SHA256: 79886974ddac20e46279e7dd3ed7c70cf59a96ce706f80db9d5f116240c8ebb1
+Section: Development
+Priority: important
+Description: tool for simulating superuser privileges
+Depiction: https://apt.bingner.com/info/fakeroot/
+Tag: purpose::console, role::developer
+
+Package: git
+Version: 2.20.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 46608
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: curl, expat (>= 2.2), libssl1.0
+Filename: debs/550.58/git_2.20.0-1_iphoneos-arm.deb
+Size: 2999886
+MD5sum: d691ccce50e5f30d055d1c08164cafc0
+SHA1: 6ddb86a41511eb1fd508825385cd68876c867d7e
+SHA256: 40ef3868ab69696e870919253bf4cc92d3922903b9bd5cdf11539dd2bf1b1b82
+Section: Data_Storage
+Priority: optional
+Description: fast content-addressable filesystem
+Depiction: https://apt.bingner.com/info/git/
+Name: Git
+Tag: purpose::console, role::hacker
+
+Package: libapt-pkg-perl
+Version: 0.1.34-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 560
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libapt-pkg5.0, perl
+Filename: debs/550.58/libapt-pkg-perl_0.1.34-1_iphoneos-arm.deb
+Size: 57650
+MD5sum: 5c10c8471c1c7bcc49ddb6b16942726b
+SHA1: 3755c8e29f04df9c320d72c95b1302e844c7c081
+SHA256: e5a54a7d25018c0bc856cd3756a4b96a9060a170b8b27e52229e130ec0290b19
+Section: Scripting
+Priority: optional
+Description: Perl interface to libapt-pkg
+Depiction: https://apt.bingner.com/info/libapt-pkg-perl/
+Tag: purpose::console, role::hacker
+
+Package: libapt-pkg5.0
+Version: 1.4.9-2
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 3096
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: bzip2, lz4, lzma, xz
+Conflicts: apt7-lib (<<1:0), com.mc.xz (<<5.2.4-7)
+Provides: libapt-pkg (=1.4.8)
+Filename: debs/550.58/libapt-pkg5.0_1.4.9-2_iphoneos-arm.deb
+Size: 602460
+MD5sum: cee2b6aa3ad40488ba2caedaf23ee6e3
+SHA1: 705c9e3a4a92adcd2ac48c2369ff69f75fd12d6f
+SHA256: 917c479349db9576db8fcadc936f9c2e27c752d904f71f5c733dd118f5ed9fb2
+Section: Packaging
+Priority: required
+Description: the advanced packaging library from Debian
+Depiction: https://apt.bingner.com/info/libapt-pkg5.0/
+Name: APT 1.4 Strict (libapt-pkg)
+Tag: purpose::library, role::developer
+
+Package: libcompress-raw-lzma-perl
+Version: 2.074-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 264
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: perl, xz
+Filename: debs/550.58/libcompress-raw-lzma-perl_2.074-1_iphoneos-arm.deb
+Size: 22702
+MD5sum: f8e5f62b189974230a9b6cd30e0366c6
+SHA1: 8a322bbf98790681910869b2a4ebfebe438db928
+SHA256: 2ea61cda2e48b90fbc24f97a0f4a0fb462190be76804348e5e3c45b6fb1905e8
+Section: Scripting
+Priority: optional
+Description: Compress::Raw::Lzma provides a low-level Perl interface for reading and writing of lzma and xz files/buffers.
+Depiction: https://apt.bingner.com/info/libcompress-raw-lzma-perl/
+Tag: purpose::console, role::hacker
+
+Package: libevent
+Version: 2.1.8-2
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 2288
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.0
+Filename: debs/550.58/libevent_2.1.8-2_iphoneos-arm.deb
+Size: 219426
+MD5sum: 31bb299dbf6b017bdab4de58f33bd2c1
+SHA1: c0d5b902b752c262be8808585f1e709e9235fba3
+SHA256: 8f769c9505915186b4452d1c38fab836e71f2d38b4ebcafd3771a9f70db5ca79
+Section: Development
+Priority: optional
+Homepage: http://libevent.org/
+Description: provides a mechanism to execute a callback function when a specific event occurs on a file descriptor or after a timeout has been reached
+Depiction: https://apt.bingner.com/info/libevent/
+Tag: purpose::library, role::developer
+
+Package: libio-compress-lzma-perl
+Version: 2.074-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 240
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libcompress-raw-lzma-perl, perl
+Filename: debs/550.58/libio-compress-lzma-perl_2.074-1_iphoneos-arm.deb
+Size: 12454
+MD5sum: de05f41f5acb2bba43a08053e98834d2
+SHA1: 9ec8d9d62b720624bbd2a6326f6c3170d1071bd3
+SHA256: 713be6ad96d4847398ae9ed27585efbc8409af2aa21df95e0576a2b9b7cfeeed
+Section: Scripting
+Priority: optional
+Description: modules for reading and writing lzma/xz files/buffers
+Depiction: https://apt.bingner.com/info/libio-compress-lzma-perl/
+Tag: purpose::console, role::hacker
+
+Package: libnghttp2-14
+Version: 1.40.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 320
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libevent, libssl1.1.1
+Conflicts: nghttp2, libnghttp2
+Replaces: nghttp2, libnghttp2
+Provides: nghttp2, libnghttp2
+Filename: debs/550.58/libnghttp2-14_1.40.0-1_iphoneos-arm.deb
+Size: 51978
+MD5sum: d2523e94b2818d6436aedcecc8e4d65e
+SHA1: 125bb8e1084e6b0b371892b5f950b15cfa32dc79
+SHA256: fee34615a5be3baade7a9a9c4d5533f2eef59ed72ac541dac93b1f12eb616fd6
+Section: Development
+Priority: standard
+Homepage: https://nghttp2.org/
+Description: library implementing HTTP/2 protocol (shared library)
+Tag: purpose::library, role::developer
+Depiction: https://apt.bingner.com/info/libnghttp2-14/
+
+Package: libnghttp2-dev
+Version: 1.40.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 408
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libevent, libssl1.1.1, libnghttp2-14
+Conflicts: nghttp2, libnghttp2
+Filename: debs/550.58/libnghttp2-dev_1.40.0-1_iphoneos-arm.deb
+Size: 31878
+MD5sum: 62d1760dae7be551210428d189d6b373
+SHA1: 36358bf2e2549e4c25da0508a65b6468f8bb4f01
+SHA256: 771ad5744a9a4e9b9276587f5cd76b3afcaff29e52f38fec7c5d1dc726fb3661
+Section: Development
+Priority: standard
+Homepage: https://nghttp2.org/
+Description: library implementing HTTP/2 protocol (development files)
+Tag: purpose::library, role::developer
+Depiction: https://apt.bingner.com/info/libnghttp2-dev/
+
+Package: libssh2
+Version: 1.8.0-2
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 488
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.0
+Filename: debs/550.58/libssh2_1.8.0-2_iphoneos-arm.deb
+Size: 73296
+MD5sum: 3ef4d0fe650e26530e3b231e44039435
+SHA1: 6d36b637086e3cf97606113a7b07061897b1699d
+SHA256: 7f469e5586af8906f51bb32a8f252d4af58f8b6b69b340460d16c5d1914515cc
+Section: Development
+Priority: optional
+Homepage: https://www.libssh2.org/
+Description: a client-side C library implementing the SSH2 protocol
+Depiction: https://apt.bingner.com/info/libssh2/
+Tag: purpose::library, role::developer
+
+Package: libssl-dev
+Version: 1.1.1i-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 3168
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1 (>= 1.1.1i)
+Filename: debs/550.58/libssl-dev_1.1.1i-1_iphoneos-arm.deb
+Size: 194566
+MD5sum: b72c4f0532a97bc66c633a25da3cb2cf
+SHA1: ce77fcf7833c7330c5fd053637423af955cd69d0
+SHA256: 07751ee9e77371dee3946ab513811123f918cc66c8d7997ff3c62eab593a54ed
+Section: Security
+Priority: standard
+Description: OpenSSL Libraries for version 1.0 (development)
+Depiction: https://apt.bingner.com/info/libssl-dev/
+Name: OpenSSL 1.0 Libraries
+Tag: purpose::library, role::developer
+
+Package: libssl0.9.8
+Version: 0.9.8zh-1
+Architecture: iphoneos-arm64
+Maintainer: Jay Freeman (saurik) <saurik@saurik.com>
+Installed-Size: 3344
+Pre-Depends: dpkg (>= 1.14.25-8)
+Conflicts: openssl (<<1.0)
+Filename: debs/550.58/libssl0.9.8_0.9.8zh-1_iphoneos-arm.deb
+Size: 559450
+MD5sum: 4ece4e3ff55c3d4462b246772d9b36d7
+SHA1: 6cca232f8ea7e80d9e1beeb70efc07b435f7cb1d
+SHA256: 9018b46af422ad50cc15d1e83fd1fc9af69268fd770b1284b556b46a706b43cf
+Section: Security
+Priority: standard
+Description: OpenSSL Libraries for version 1.0
+Depiction: https://apt.bingner.com/info/libssl0.9.8/
+Name: OpenSSL 0.9.8 Libraries
+Tag: purpose::library, role::developer
+
+Package: libssl1.0
+Version: 1.0.2r-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 4520
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: ca-certificates
+Conflicts: openssl (<<1.0.2q)
+Filename: debs/550.58/libssl1.0_1.0.2r-1_iphoneos-arm.deb
+Size: 725450
+MD5sum: fc13667f7a67bf8a4076e1570bc50f4f
+SHA1: 8940f56a8bf79cb97509de482c8f19b22f77d3db
+SHA256: 896b8eb8c7a6d497532a5baa12b77af6f05839f01665a79a70435542ca3a7868
+Section: Security
+Priority: standard
+Description: OpenSSL Libraries for version 1.0
+Depiction: https://apt.bingner.com/info/libssl1.0/
+Name: OpenSSL 1.0 Libraries
+Tag: purpose::library, role::developer
+
+Package: libssl1.1.1
+Version: 1.1.1n-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 11904
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: ca-certificates
+Filename: debs/550.58/libssl1.1.1_1.1.1n-1_iphoneos-arm.deb
+Size: 1623598
+MD5sum: 36043715cdb2f0395e3fafea418c3f36
+SHA1: f53e1c2056ff303cc4fd12b214c0e7f96e07be3f
+SHA256: 625e3835c1911eec19a645126f5757176c13dff6d56b5ca00575d56867ddb4fd
+Section: Security
+Priority: standard
+Description: OpenSSL Libraries for version 1.1.1
+Depiction: https://apt.bingner.com/info/libssl1.1.1/
+Name: OpenSSL 1.1.1 Libraries
+Tag: purpose::library, role::developer
+
+Package: libterm-readline-perl-perl
+Version: 1.0303-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 296
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: perl, xz
+Filename: debs/550.58/libterm-readline-perl-perl_1.0303-1_iphoneos-arm.deb
+Size: 38160
+MD5sum: b48cadf28c3cf039e98ac3be92dcbc20
+SHA1: df0e0a3c99e68564162fe97f08aa680f951d35e6
+SHA256: c02d2d5a6ae34f6241731f3646c0a65a0448a7942dfa12ee237f5a76962bf1a0
+Section: Scripting
+Priority: optional
+Description: Perl implementation of Readline libraries
+Depiction: https://apt.bingner.com/info/libterm-readline-perl-perl/
+Tag: purpose::console, role::hacker
+
+Package: lz4
+Version: 1.7.5-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 840
+Pre-Depends: dpkg (>= 1.14.25-8)
+Filename: debs/550.58/lz4_1.7.5-1_iphoneos-arm.deb
+Size: 81132
+MD5sum: 13d1923c7f33f51e329cd2944b5d5890
+SHA1: ea1314003d028118ccc360f751adc0df32db8475
+SHA256: e72bfe758ad83dad679ca9e057753ea37528dc83a88943d7c8c1c5571a7059ce
+Section: Archiving
+Priority: important
+Homepage: http://tukaani.org/lzma/
+Description: Extremely Fast Compression algorithm
+Depiction: https://apt.bingner.com/info/lz4/
+Name: LZ4
+Tag: purpose::console, role::hacker
+
+Package: openssh
+Version: 8.4-2
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 8
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1, openssh-server, openssh-client, openssh-global-listener
+Filename: debs/550.58/openssh_8.4-2_iphoneos-arm.deb
+Size: 1022
+MD5sum: 0ce97f257cbcd8ae49ccb32e78b87485
+SHA1: 8f9339e7fdbef16aefdd127bfbcd2e2610d33fba
+SHA256: 9bb86af17ddb5830685b15f8c5437b843c5c8502d80c4dd8560f66f6e867b115
+Section: Networking
+Priority: important
+Description: secure shell (SSH) server, for secure access from remote machines
+ This is the portable version of OpenSSH, a free implementation of the
+ Secure Shell protocol as specified by the IETF secsh working group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine and
+ for executing commands on a remote machine.  It provides secure
+ encrypted communications between two untrusted hosts over an insecure
+ network. X11 connections and arbitrary TCP/IP ports can also be
+ forwarded over the secure channel.  It can be used to provide
+ applications with a secure communication channel.
+ .
+ This package provides the sshd server.
+ .
+ In some countries it may be illegal to use any encryption at all
+ without a special permit.
+Tag: purpose::daemon, purpose::console, role::enduser
+Depiction: https://apt.bingner.com/info/openssh/
+Name: OpenSSH
+
+Package: openssh-client
+Version: 8.4-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 8016
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1
+Breaks: openssh (<= 8.4-1)
+Filename: debs/550.58/openssh-client_8.4-1_iphoneos-arm.deb
+Size: 574956
+MD5sum: 25124f99aaaa68254e51526c97e8992f
+SHA1: 3cf292e4f51cc0adaec5578d37b0139edd9db582
+SHA256: c3e429b16f262dc7f33b566ab865504d37b1375201635b62d8f15ad864284d16
+Section: Networking
+Priority: important
+Description: secure shell (SSH) client, for secure access to remote machines
+ This is the portable version of OpenSSH, a free implementation of the
+ Secure Shell protocol as specified by the IETF secsh working group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine and
+ for executing commands on a remote machine.  It provides secure
+ encrypted communications between two untrusted hosts over an insecure
+ network. X11 connections and arbitrary TCP/IP ports can also be
+ forwarded over the secure channel.  It can be used to provide
+ applications with a secure communication channel.
+ .
+ This package provides the client binaries.
+ .
+ In some countries it may be illegal to use any encryption at all
+ without a special permit.
+Tag: purpose::daemon, purpose::console, role::enduser
+Depiction: https://apt.bingner.com/info/openssh-client/
+Name: OpenSSH Clients
+
+Package: openssh-global-listener
+Version: 8.4-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 32
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1, openssh-server (>= 8.4)
+Breaks: openssh (<= 8.4-1)
+Filename: debs/550.58/openssh-global-listener_8.4-1_iphoneos-arm.deb
+Size: 1760
+MD5sum: 3d1246a388f4f8b1ba9378e7bf52398d
+SHA1: cbb11ae0e002b510c7f34624e34f84bceb183bda
+SHA256: 2149c88b499e9514070a28119788d22388c56564aceb277762927721d5138030
+Section: Networking
+Priority: important
+Description: secure shell (SSH) server, for secure access from remote machines
+ This is the portable version of OpenSSH, a free implementation of the
+ Secure Shell protocol as specified by the IETF secsh working group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine and
+ for executing commands on a remote machine.  It provides secure
+ encrypted communications between two untrusted hosts over an insecure
+ network. X11 connections and arbitrary TCP/IP ports can also be
+ forwarded over the secure channel.  It can be used to provide
+ applications with a secure communication channel.
+ .
+ This package provides a global listener on port 22.
+ .
+ In some countries it may be illegal to use any encryption at all
+ without a special permit.
+Tag: purpose::daemon, purpose::console, role::enduser
+Depiction: https://apt.bingner.com/info/openssh-global-listener/
+Name: OpenSSH Global Listener
+
+Package: openssh-local-listener
+Version: 8.4-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 32
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1, openssh-server (>= 8.4)
+Filename: debs/550.58/openssh-local-listener_8.4-1_iphoneos-arm.deb
+Size: 1752
+MD5sum: e4cc9dec3e78edae95008a1fbab210c9
+SHA1: 171e9cd24b69bd5c54e2ea102bdfa4764f43d091
+SHA256: 154728ff53864f73c9d1b23422eec32c4da9b6e483f8cd70ac8b2d42585a8a31
+Section: Networking
+Priority: important
+Description: secure shell (SSH) server, for secure access from remote machines
+ This is the portable version of OpenSSH, a free implementation of the
+ Secure Shell protocol as specified by the IETF secsh working group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine and
+ for executing commands on a remote machine.  It provides secure
+ encrypted communications between two untrusted hosts over an insecure
+ network. X11 connections and arbitrary TCP/IP ports can also be
+ forwarded over the secure channel.  It can be used to provide
+ applications with a secure communication channel.
+ .
+ This package provides a listener for only localhost on port 22.
+ .
+ In some countries it may be illegal to use any encryption at all
+ without a special permit.
+Tag: purpose::daemon, purpose::console, role::enduser
+Depiction: https://apt.bingner.com/info/openssh-local-listener/
+Name: OpenSSH Localhost Listener
+
+Package: openssh-server
+Version: 8.4-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1640
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1, openssh-client (>= 8.4)
+Breaks: openssh (<= 8.4-1)
+Filename: debs/550.58/openssh-server_8.4-1_iphoneos-arm.deb
+Size: 301374
+MD5sum: f5ba2104f9d51eefeb4bba90d39742b1
+SHA1: d5437cbf341af55d6ea970bcefa950d75edb70c7
+SHA256: a028ae3f04cadea16ac41dfca657c222de8b5c2e9616703441b9fff2ab5c6f78
+Section: Networking
+Priority: important
+Description: secure shell (SSH) server, for secure access from remote machines
+ This is the portable version of OpenSSH, a free implementation of the
+ Secure Shell protocol as specified by the IETF secsh working group.
+ .
+ Ssh (Secure Shell) is a program for logging into a remote machine and
+ for executing commands on a remote machine.  It provides secure
+ encrypted communications between two untrusted hosts over an insecure
+ network. X11 connections and arbitrary TCP/IP ports can also be
+ forwarded over the secure channel.  It can be used to provide
+ applications with a secure communication channel.
+ .
+ This package provides the sshd server.
+ .
+ In some countries it may be illegal to use any encryption at all
+ without a special permit.
+Tag: purpose::daemon, purpose::console, role::enduser
+Depiction: https://apt.bingner.com/info/openssh-server/
+Name: OpenSSH Server Binaries
+
+Package: openssl
+Version: 1.1.1i-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1256
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: libssl1.1.1, firmware (>=11.0) | libssl0.9.8, libssl1.0
+Filename: debs/550.58/openssl_1.1.1i-1_iphoneos-arm.deb
+Size: 228604
+MD5sum: 36f05f5315efd4ff4b893d38231be095
+SHA1: 416dd9d58f21c130962304293e30ce8b723b320e
+SHA256: 2c950ac0142f1f92924e8fe35720a8b2125e953c50323964de82b5463493cfb3
+Section: Security
+Priority: standard
+Description: OpenSSL tools
+Depiction: https://apt.bingner.com/info/openssl/
+Name: OpenSSL
+Tag: purpose::library, role::developer
+
+Package: pcre2
+Version: 10.35-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1744
+Pre-Depends: dpkg (>= 1.14.25-8)
+Filename: debs/550.58/pcre2_10.35-1_iphoneos-arm.deb
+Size: 253626
+MD5sum: 0665fa06fb530e254ed90de0ef448801
+SHA1: 820f2cdee9196ceddd2e6d85271224bebfefbf63
+SHA256: ac4ccef6caeb611c28c7ac30eacd4c73b64cfb5660499551f565e60740411e44
+Section: Development
+Priority: required
+Description: Perl-compatible regular expressions
+Depiction: https://apt.bingner.com/info/pcre2/
+Tag: purpose::library, role::developer
+
+Package: perl
+Version: 5.28.0-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 97936
+Pre-Depends: dpkg (>= 1.14.25-8)
+Filename: debs/550.58/perl_5.28.0-1_iphoneos-arm.deb
+Size: 7816032
+MD5sum: edbad4bfbab86cb8d5c098b36cf1bd08
+SHA1: b2024903413ec43b23e15112be79ac18290321dc
+SHA256: 61865c952dc8192dca18dda2f4bc2a4268f86a243969353cb91b6364168f0b78
+Section: Scripting
+Priority: optional
+Description: awesome combination of sed and awk
+Depiction: https://apt.bingner.com/info/perl/
+Name: Perl
+Tag: purpose::console, role::hacker
+
+Package: shell-cmds
+Version: 118-8
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 632
+Pre-Depends: dpkg (>= 1.14.25-8)
+Provides: killall, which
+Filename: debs/550.58/shell-cmds_118-8_iphoneos-arm.deb
+Size: 13094
+MD5sum: 698acf4b3118e51a3aeb0d0e14550399
+SHA1: 3ed0c1cd4568daed7956bc7d0a15bdca12dd00a7
+SHA256: fb3f75407a6751234ced12026b983273d6769c816832b9874d8f5735b520a9f2
+Section: Administration
+Priority: important
+Description: killall, mktemp, renice, time, which
+Depiction: https://apt.bingner.com/info/shell-cmds/
+Tag: purpose::console, role::hacker
+
+Package: uikittools
+Version: 1.1.22-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1136
+Depends: findutils, coreutils-bin
+Filename: debs/550.58/uikittools_1.1.22-1_iphoneos-arm.deb
+Size: 45460
+MD5sum: 7e7ed4738a5c3813af78d85a80efaf59
+SHA1: fdfd77518f37430a01af2d3defa3a929bcdbc657
+SHA256: 9f79276d6596a1741e03a350b7dc38a3416f95643df0ff7aa3edabdf04cecf6d
+Section: Utilities
+Priority: optional
+Homepage: http://tukaani.org/lzma/
+Description: UIKit/GraphicsServices command line access
+Depiction: https://apt.bingner.com/info/uikittools/
+Name: UIKit Tools
+Tag: purpose::console, role::hacker
+
+Package: wget
+Version: 1.20.3-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 976
+Pre-Depends: dpkg (>= 1.14.25-8)
+Depends: gettext, libssl1.1.1, pcre2
+Filename: debs/550.58/wget_1.20.3-1_iphoneos-arm.deb
+Size: 219472
+MD5sum: 1e8739338579061ea9d3ab750a01840a
+SHA1: 3e7f61e30e76e3cb4a105d800282c6fd650c851c
+SHA256: c880716b8d5b50e1ec5a699f86c46edde7920a3ffae94dd69e58d3c63da907bb
+Section: Networking
+Priority: important
+Description: simple HTTP file transfer client
+Depiction: https://apt.bingner.com/info/wget/
+Tag: purpose::console, role::hacker
+
+Package: xz
+Version: 5.2.4-1
+Architecture: iphoneos-arm64
+Maintainer: Sam Bingner <maintainer@sbdhi.com>
+Installed-Size: 1104
+Depends: lzma (=4.32.7-5)
+Conflicts: xz-utils
+Provides: xz-utils
+Filename: debs/550.58/xz_5.2.4-1_iphoneos-arm.deb
+Size: 152646
+MD5sum: 3069ffa85194f92f7f7024f7c3ee9b5b
+SHA1: aa974cb7054375f3ae7b520cdd1a7aec5da9120c
+SHA256: c02b911533a0b645a74ab4a5356e06c5479bc3faa9d092f85c5ad5454007da17
+Section: Archiving
+Priority: required
+Homepage: http://tukaani.org/lzma/
+Description: slower, but better, compression algorithm
+Depiction: https://apt.bingner.com/info/xz/
+Name: XZ Utils
+Tag: purpose::console, role::hacker
+
