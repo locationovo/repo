@@ -1,74 +1,76 @@
-# 第三方插件声明与免责
+# Third-Party Plugin Disclaimer and Notice
 
-## 关于本仓库
+[简体中文](./DISCLAIMER.zh-CN.md)
 
-本仓库是一个自动化构建的越狱软件源，托管于 GitHub Pages，通过 GitHub Actions 定期从多个公开越狱源同步插件索引。
+## About This Repository
 
-## 第三方插件版权声明
+This repository is an automated jailbreak repository hosted on GitHub Pages. It synchronizes plugin indices from multiple public jailbreak sources via GitHub Actions.
 
-本仓库收录、索引和分发了来自多个第三方越狱源的插件包。这些插件的版权归其原始作者所有，本项目对其仅做以下处理：
+## Third-Party Plugin Copyright Notice
 
-- **索引镜像（如 Procursus、Bingner）**：仅同步并转换其 `Packages` 索引（重写 `Architecture` 字段为 `iphoneos-arm64` 或 `arm64`，并将 `Filename` 指向原始官方服务器），**不物理存储或二次分发任何 `.deb` 包体**，客户端下载时直连原官方源。
-- **主源及辅助仓库合并**：保留插件的原始架构（如 `iphoneos-arm64`、`iphoneos-arm64e` 等），仅合并索引去重，不修改原始包体。
+This repository indexes and distributes plugin packages from various third-party jailbreak sources. All copyrights for these plugins belong to their original authors. This project only performs the following operations:
 
-针对不同许可证类型的第三方插件，适用以下声明：
+- **Index Mirrors (e.g., Procursus, Bingner)**: Only the `Packages` indices are synchronized and converted (the `Architecture` field is rewritten to `iphoneos-arm64` or `arm64`, and `Filename` is pointed to the original official servers). **No `.deb` packages are physically stored or redistributed.** Clients download directly from the original official sources.
+- **Main and Auxiliary Repositories**: The original architectures of the plugins are preserved (e.g., `iphoneos-arm64`, `iphoneos-arm64e`). Only index merging and deduplication are performed, without modifying the original packages.
 
-### 1. MIT/BSD/Apache 2.0 等宽松许可证
+The following notices apply to third-party plugins under different license types:
 
-此类插件允许自由使用、复制、修改及再分发，只需保留原始版权声明。本项目在索引中保留了原始作者、版本及许可证信息。若您是插件作者，发现信息有误或希望调整展示方式，请随时联系。
+### 1. Permissive Licenses (MIT/BSD/Apache 2.0)
 
-### 2. GPL/LGPL 等 Copyleft 许可证
+Such plugins allow free use, copying, modification, and redistribution, provided that the original copyright notice is retained. This project retains the original author, version, and license information in the indices. If you are a plugin author and find any information inaccurate or wish to adjust how it is presented, please contact us.
 
-此类插件要求再分发时提供完整源代码，且衍生作品须以相同许可证发布。本项目仅对索引元数据进行修改，未修改插件代码本身。若您认为本仓库的再分发方式不符合 GPL 要求，请告知，我将立即补充源码链接或移除相关条目。
+### 2. Copyleft Licenses (GPL/LGPL)
 
-### 3. 未明确标注许可证的插件
+Such plugins require that the complete source code be provided upon redistribution, and that derivative works be released under the same license. This project only modifies index metadata and does not modify the plugin code itself. If you believe this repository's redistribution method does not comply with GPL requirements, please let us know, and we will immediately provide source code links or remove the relevant entries.
 
-部分老旧插件未附带明确的许可证文件。根据著作权法，未声明许可证即默认「保留所有权利」。本项目收录此类插件仅出于**兼容性适配与存档目的**，无意侵犯原作者权益。若您是相关插件的权利人，且不希望其在本仓库中被索引或分发，请通过下方联系方式告知，我将在收到通知后 **48 小时内** 移除相关内容。
+### 3. Plugins Without an Explicit License
 
-### 4. 明确禁止再分发的插件
+Some older plugins do not include an explicit license file. Under copyright law, the absence of a license means "all rights reserved." This project includes such plugins solely for **compatibility adaptation and archival purposes**, with no intention of infringing upon the original authors' rights. If you are the rights holder of such a plugin and do not wish for it to be indexed or distributed in this repository, please contact us using the details below, and we will remove the relevant content within **48 hours** of receiving notice.
 
-若您发现本仓库意外收录了明确标注「禁止再分发」的插件，这属于审核流程的疏漏。请立即联系，我将在 **24 小时内** 删除相关条目及所有关联文件。
+### 4. Plugins Explicitly Prohibiting Redistribution
 
-## 自行修改并构建的工具
+If you find that this repository has inadvertently included a plugin explicitly marked as "redistribution prohibited," this is an oversight in the review process. Please contact us immediately, and we will delete the relevant entries and all associated files within **24 hours**.
 
-本仓库额外收录了部分经过自行修改并重新构建的经典开源工具（如 Git、FFmpeg 等），目的是适配越狱环境或补充特定功能。这些工具与前述“仅做架构适配”的插件不同，**涉及对源代码的实质性修改和重新编译**。
+## Self-Modified and Rebuilt Tools
 
-针对此类工具，遵循以下原则：
+This repository additionally includes some classic open-source tools (e.g., Git, FFmpeg) that have been modified and rebuilt to adapt to the jailbreak environment or supplement specific features. Unlike the aforementioned plugins that only undergo architecture adaptation, these tools **involve substantive modifications to the source code and recompilation**.
 
-### 1. 许可证合规
+The following principles apply to such tools:
 
-修改后的工具继续沿用原项目的开源许可证（如 GPL、LGPL 等）进行分发。每个工具包内均包含：
-- 原始版权声明与许可证全文
-- 上游项目仓库链接
-- 修改后的完整源代码仓库链接（公开可访问）
+### 1. License Compliance
 
-若原项目使用 GPL 等强互惠许可证，修改后的源码已以相同许可证在对应仓库中完整公开，确保接收者享有同等的自由。
+The modified tools continue to be distributed under the original project's open-source license (e.g., GPL, LGPL). Each tool package includes:
+- The original copyright notice and full license text
+- The upstream project repository link
+- The complete modified source code repository link (publicly accessible)
 
-### 2. 修改范围说明
+If the original project uses a strong copyleft license such as GPL, the modified source code has been fully disclosed under the same license in the corresponding repository, ensuring that recipients enjoy the same freedoms.
 
-修改内容仅限于越狱环境兼容性适配、功能修复或功能增强，不涉及植入广告、恶意代码或后门。每个工具的详细修改记录可在其源码仓库的提交历史中查看。
+### 2. Scope of Modification
 
-### 3. 版权归属
+Modifications are limited to jailbreak environment compatibility adaptation, bug fixes, or feature enhancements. No ads, malicious code, or backdoors are introduced. Detailed modification records for each tool can be viewed in the commit history of its source repository.
 
-这些工具的原始版权仍归原作者所有。本仓库仅对修改部分拥有相应的权利，并以原项目许可证的条款进行分发。工具包内的版权声明文件中已明确区分原始作者与修改者信息。
+### 3. Copyright Ownership
 
-## 免责声明
+The original copyrights of these tools remain with the original authors. This repository only holds rights to the modified portions and distributes them under the terms of the original project's license. The copyright notice files in the tool packages clearly distinguish between the original authors and the modifier.
 
-- 本项目以「现状（as-is）」提供所有第三方插件索引及适配信息，**不对其功能、安全性、稳定性或合法性作任何明示或暗示的担保**。
-- 第三方插件的使用风险由用户自行承担。因安装、使用本仓库索引或分发的插件所造成的任何设备损坏、数据丢失、系统异常或其他损失，本项目维护者不承担任何责任。
-- 本项目不对第三方插件的许可证合规性作最终判断。用户在使用前应自行核实原始许可证条款。
-- 本仓库中所有商标、产品名称及标识均为其各自所有者的财产，仅用于识别目的。
+## Disclaimer
 
-## 版权投诉与联系
+- This project provides all third-party plugin indices and adaptation information on an "as-is" basis, **without any express or implied warranties** regarding their functionality, security, stability, or legality.
+- The risk of using third-party plugins is borne solely by the user. The maintainers of this project assume no responsibility for any device damage, data loss, system anomalies, or other losses caused by installing or using plugins indexed or distributed by this repository.
+- This project does not make a final judgment on the license compliance of third-party plugins. Users should verify the original license terms themselves before use.
+- All trademarks, product names, and logos in this repository are the property of their respective owners and are used for identification purposes only.
 
-若您是相关插件的版权所有者，并对本仓库的收录方式有任何异议，请通过以下方式联系：
+## Copyright Complaints and Contact
 
-- **邮箱：** [locationovo@outlook.com]
-- **GitHub Issue：** [locationovo/repo]
+If you are the copyright owner of a relevant plugin and have any objections to how it is included in this repository, please contact us via:
 
-请在邮件或 Issue 中提供：
-1. 被侵权的插件名称及版本
-2. 您的版权证明或作者身份说明
-3. 您希望我采取的措施（移除/修改署名/补充许可证等）
+- **Email:** [locationovo@outlook.com]
+- **GitHub Issue:** [locationovo/repo]
 
-我将在收到有效通知后尽快处理。
+Please provide the following in your email or Issue:
+1. The name and version of the infringing plugin
+2. Your proof of copyright or statement of authorship
+3. The action you wish us to take (removal, attribution modification, license supplementation, etc.)
+
+We will handle valid notices as quickly as possible.

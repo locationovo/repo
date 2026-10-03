@@ -1,17 +1,21 @@
-# 个人越狱源
+# Personal Jailbreak Repo
 
-添加请到:[源主页](https://locationovo.github.io/repo)
+[简体中文](./README.zh-CN.md)
 
-## 镜像源声明
+Add via: [Source Homepage](https://locationovo.github.io/repo)
 
-本仓库包含以下历史版本的索引镜像：
-- **Procursus**：镜像了 `1500`、`1600`、`1700` 的 `iphoneos-arm64` 索引。
-- **Bingner**：镜像了 `550.58`、`800.00`、`1200.00`、`1443.00` 的索引。
+## Mirror Statement
 
-**注意事项：**
-1. 本仓库**仅镜像索引文件**（`Packages`、`Release` 等），不存储或分发任何原始 `.deb` 包体，客户端下载时直连官方源。
-2. 索引中的 `Architecture` 字段已统一重写为 `iphoneos-arm64`，旨在配合现代包管理器进行研究性使用，安装前请自行评估兼容性。
+This repository contains rebuilt and rewritten historical index mirrors:
 
-## 版权声明
+- **Procursus**: rebuilt `iphoneos-arm64` indices for `1500`, `1600`, `1700`.
+- **Bingner**: rewritten indices for `550.58`, `800.00`, `1200.00`, `1443.00`. Only the `Architecture` and `Filename` fields were remapped.
 
-本仓库收录的第三方插件及工具版权归原始作者所有。完整的许可证说明、免责条款及联系方式，请阅读 **[DISCLAIMER.md](./DISCLAIMER.md)**。
+**Notes:**
+
+1. Only index files (`Packages`, `Release`, etc.) are mirrored. No original `.deb` packages are stored or redistributed. Clients download directly from the official sources.
+2. The `Architecture` field in the indices has been uniformly rewritten to `iphoneos-arm64`, intended for research use with modern package managers. Please evaluate compatibility before installing.
+
+## Copyright
+
+All third-party plugins and tools included in this repository are copyrighted by their original authors. For full license information, disclaimers, and contact details, see **[DISCLAIMER.md](./DISCLAIMER.md)**.
