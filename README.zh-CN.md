@@ -4,17 +4,20 @@
 
 添加请到：[源主页](https://locationovo.github.io/repo)
 
-## 镜像源声明
+## 概述
 
-本仓库包含以下重建与重写的历史索引镜像：
+本仓库是一个托管于 GitHub Pages 的自动化越狱软件源。它通过 GitHub API 聚合来自各个子仓库 GitHub Releases 中分发的软件包。
 
-- **Procursus**：重建了 `1500`、`1600`、`1700` 的 `iphoneos-arm64` 索引。
-- **Bingner**：重写了 `550.58`、`800.00`、`1200.00`、`1443.00` 的索引，仅改写了 `Architecture` 与 `Filename` 字段。
+### 架构说明
+
+- **主仓库（当前仓库）**：托管索引和签名文件。从 Releases 拉取元数据。
+- **Recipes**：从源码编译自定义插件，并上传 `.deb` 到 Releases。
+- **Patched Legacy**：将旧版 rootful 插件修补以适配现代环境，并上传到 Releases。
 
 **注意事项：**
 
-1. 本仓库**仅镜像索引文件**（`Packages`、`Release` 等），不存储或分发任何原始 `.deb` 包体，客户端下载时直连官方源。
-2. 索引中的 `Architecture` 字段已统一重写为 `iphoneos-arm64`，旨在配合现代包管理器进行研究性使用，安装前请自行评估兼容性。
+1. **本 Git 仓库不直接存储任何 `.deb` 文件。** 软件包作为 GitHub Release 资产托管，并通过其 CDN 下载。
+2. 历史包使用 `rootless-patcher` 进行修补。若修补失败或崩溃，将分发原始包。不保证兼容性，安装前请自行评估。
 
 ## 版权声明
 

@@ -4,14 +4,15 @@
 
 ## About This Repository
 
-This repository is an automated jailbreak repository hosted on GitHub Pages. It synchronizes plugin indices from multiple public jailbreak sources via GitHub Actions.
+This repository is an automated jailbreak repository hosted on GitHub Pages. It synchronizes, patches, and compiles packages via GitHub Actions. The actual `.deb` assets are hosted on GitHub Releases, while this repository serves as the centralized index and signature authority.
 
 ## Third-Party Plugin Copyright Notice
 
-This repository indexes and distributes plugin packages from various third-party jailbreak sources. All copyrights for these plugins belong to their original authors. This project only performs the following operations:
+This repository indexes and distributes plugin packages from various third-party jailbreak sources. All copyrights for these plugins belong to their original authors. This project performs the following operations:
 
-- **Index Mirrors (e.g., Procursus, Bingner)**: Only the `Packages` indices are synchronized and converted (the `Architecture` field is rewritten to `iphoneos-arm64` or `arm64`, and `Filename` is pointed to the original official servers). **No `.deb` packages are physically stored or redistributed.** Clients download directly from the original official sources.
-- **Main and Auxiliary Repositories**: The original architectures of the plugins are preserved (e.g., `iphoneos-arm64`, `iphoneos-arm64e`). Only index merging and deduplication are performed, without modifying the original packages.
+- **Patched Legacy Packages (Procursus, Bingner, etc.)**: Original packages are downloaded, processed via `rootless-patcher` to restore modern environment compatibility, and redistributed via GitHub Releases. If patching fails, the original package is distributed. **Only binary headers (e.g., Mach-O load commands) are modified; the original source code is not altered.**
+- **Custom Built Packages**: Source code is pulled from upstream, compiled for the jailbreak environment, and distributed via GitHub Releases.
+- **Index Aggregation**: The main repository only aggregates `Packages.entry` metadata from Releases, merges them, and signs the final indices.
 
 The following notices apply to third-party plugins under different license types:
 
@@ -21,19 +22,22 @@ Such plugins allow free use, copying, modification, and redistribution, provided
 
 ### 2. Copyleft Licenses (GPL/LGPL)
 
-Such plugins require that the complete source code be provided upon redistribution, and that derivative works be released under the same license. This project only modifies index metadata and does not modify the plugin code itself. If you believe this repository's redistribution method does not comply with GPL requirements, please let us know, and we will immediately provide source code links or remove the relevant entries.
+Such plugins require that the complete source code be provided upon redistribution, and that derivative works be released under the same license. 
+- For **Custom Built Packages**, the modified source code is fully disclosed in the corresponding recipe repositories.
+- For **Patched Legacy Packages**, this project only modifies binary metadata to restore compatibility and does not alter the plugin's source code. 
+If you believe this repository's redistribution method does not comply with GPL requirements, please let us know, and we will immediately provide source code links or remove the relevant assets.
 
 ### 3. Plugins Without an Explicit License
 
-Some older plugins do not include an explicit license file. Under copyright law, the absence of a license means "all rights reserved." This project includes such plugins solely for **compatibility adaptation and archival purposes**, with no intention of infringing upon the original authors' rights. If you are the rights holder of such a plugin and do not wish for it to be indexed or distributed in this repository, please contact us using the details below, and we will remove the relevant content within **48 hours** of receiving notice.
+Some older plugins do not include an explicit license file. Under copyright law, the absence of a license means "all rights reserved." This project includes such plugins solely for **compatibility adaptation, archival, and research purposes**, with no intention of infringing upon the original authors' rights. If you are the rights holder of such a plugin and do not wish for it to be indexed or distributed in this repository, please contact us using the details below, and we will remove the relevant assets within **48 hours** of receiving notice.
 
 ### 4. Plugins Explicitly Prohibiting Redistribution
 
-If you find that this repository has inadvertently included a plugin explicitly marked as "redistribution prohibited," this is an oversight in the review process. Please contact us immediately, and we will delete the relevant entries and all associated files within **24 hours**.
+If you find that this repository has inadvertently included a plugin explicitly marked as "redistribution prohibited," this is an oversight in the review process. Please contact us immediately, and we will delete the relevant Release assets and index entries within **24 hours**.
 
 ## Self-Modified and Rebuilt Tools
 
-This repository additionally includes some classic open-source tools (e.g., Git, FFmpeg) that have been modified and rebuilt to adapt to the jailbreak environment or supplement specific features. Unlike the aforementioned plugins that only undergo architecture adaptation, these tools **involve substantive modifications to the source code and recompilation**.
+This repository additionally includes some classic open-source tools (e.g., Git, FFmpeg) that have been modified and rebuilt to adapt to the jailbreak environment or supplement specific features. Unlike the aforementioned plugins that only undergo binary adaptation, these tools **involve substantive modifications to the source code and recompilation**.
 
 The following principles apply to such tools:
 
@@ -56,7 +60,7 @@ The original copyrights of these tools remain with the original authors. This re
 
 ## Disclaimer
 
-- This project provides all third-party plugin indices and adaptation information on an "as-is" basis, **without any express or implied warranties** regarding their functionality, security, stability, or legality.
+- This project provides all third-party plugin indices and adapted packages on an "as-is" basis, **without any express or implied warranties** regarding their functionality, security, stability, or legality.
 - The risk of using third-party plugins is borne solely by the user. The maintainers of this project assume no responsibility for any device damage, data loss, system anomalies, or other losses caused by installing or using plugins indexed or distributed by this repository.
 - This project does not make a final judgment on the license compliance of third-party plugins. Users should verify the original license terms themselves before use.
 - All trademarks, product names, and logos in this repository are the property of their respective owners and are used for identification purposes only.

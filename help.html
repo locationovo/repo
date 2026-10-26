@@ -6,75 +6,27 @@
 <title>帮助 - Repo</title>
 <link rel="stylesheet" href="style.css">
 <style>
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
-}
-.wrapper {
-    width: 100%;
-    max-width: 560px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-}
-.header h1 {
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--text-primary);
-}
+body { display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+.wrapper { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 20px; }
+.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.header h1 { font-size: 22px; font-weight: 700; color: var(--text-primary); }
 .back-btn {
-    font-size: 13px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 6px 12px;
-    border: 1px solid var(--btn-border);
-    border-radius: 8px;
-    background: var(--card-bg);
-    transition: border-color .15s, background .15s;
+    font-size: 13px; color: var(--text-secondary); text-decoration: none;
+    padding: 6px 12px; border: 1px solid var(--btn-border); border-radius: 8px;
+    background: var(--card-bg); transition: border-color .15s, background .15s;
 }
-.back-btn:hover {
-    border-color: var(--btn-hover-border);
-    background: var(--btn-hover-bg);
-}
-.faq-item {
-    background: var(--card-bg);
-    border-radius: 14px;
-    padding: 22px 24px;
-    box-shadow: var(--card-shadow);
-}
-.faq-item h2 {
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-}
-.faq-item p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 8px;
-}
+.back-btn:hover { border-color: var(--btn-hover-border); background: var(--btn-hover-bg); }
+.faq-item { background: var(--card-bg); border-radius: 14px; padding: 22px 24px; box-shadow: var(--card-shadow); }
+.faq-item h2 { font-size: 16px; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
+.faq-item p { font-size: 14px; color: var(--text-secondary); margin-bottom: 8px; }
 .faq-item p:last-child { margin-bottom: 0; }
-.faq-item ul {
-    padding-left: 20px;
-    margin-top: 6px;
-    font-size: 14px;
-    color: var(--text-secondary);
-}
+.faq-item ul { padding-left: 20px; margin-top: 6px; font-size: 14px; color: var(--text-secondary); }
 .faq-item ul li { margin-bottom: 4px; }
 </style>
 </head>
 <body>
 
 <div class="wrapper">
-
     <div class="header">
         <h1>常见问题</h1>
         <a href="index.html" class="back-btn">返回主页</a>
@@ -111,10 +63,25 @@ body {
     </div>
 
     <div class="faq-item">
-        <h2>Q: 镜像源和主源有什么区别？</h2>
-        <p>A: 主源包含我维护的插件；Procursus 和 Bingner 镜像是重建的历史索引，仅用于研究目的，不存储原始 <code>.deb</code> 文件，安装时直连官方源。</p>
+        <h2>Q: 主源、镜像源和这些包到底是怎么运作的？</h2>
+        <p>A: 本越狱源的架构设计为“轻量索引，重物分离”，以避免 Git 仓库超载：</p>
+        <ul>
+            <li><strong>主源（本页面所在源）</strong>：仅作为索引聚合器，不存储任何 <code>.deb</code> 文件。它通过 GitHub API 自动抓取各个子仓库的元数据生成索引。</li>
+            <li><strong>自主编译包</strong>：由我的 <code>recipes</code> 仓库从源码编译打包，作为资产发布在 GitHub Releases 中。</li>
+            <li><strong>修补历史包（Procursus / Bingner）</strong>：很多旧版插件仅支持 rootful 环境，直接安装会报错。我的 <code>patched-legacy</code> 仓库会下载这些原包，通过自动化工具重写二进制加载路径（修复 dylib 报错），然后<strong>将修补后的包</strong>同样作为资产发布在 GitHub Releases 中（若修补失败则保留原包）。</li>
+        </ul>
+        <p>当您在客户端点击安装或下载时，无论是我编译的还是修补的，都是通过 <strong>GitHub Releases 的高速 CDN</strong> 获取，而不是直连原作者的服务器。这使得旧插件能在现代越狱环境下被研究和使用。</p>
     </div>
 
+    <div class="faq-item">
+        <h2>Q: 为什么包是通过 Releases 下载的？</h2>
+        <p>A: 为了避免 Git 仓库体积膨胀（GitHub 限制单仓库 1GB），本源的软件包（包括我编译的插件和修补的历史包）均作为 GitHub Release 资产托管。主仓库仅保存轻量的文本索引。</p>
+    </div>
+
+    <div class="faq-item">
+        <h2>Q: 什么是“修补的”历史包？</h2>
+        <p>A: 很多优秀的旧插件仅支持 rootful 环境，直接安装会报错。本源使用自动化工具重写了包的二进制加载路径，使其能在现代 rootless 环境下运行。若修补失败，将回退至原始包。不保证所有旧插件都能完美运行。</p>
+    </div>
 </div>
 
 </body>

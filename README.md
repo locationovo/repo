@@ -1,20 +1,23 @@
 # Personal Jailbreak Repo
 
-[简体中文](./README.zh-CN.md)
+[中文文档](./README.zh-CN.md)
 
 Add via: [Source Homepage](https://locationovo.github.io/repo)
 
-## Mirror Statement
+## Overview
 
-This repository contains rebuilt and rewritten historical index mirrors:
+This repository is an automated jailbreak source hosted on GitHub Pages. It aggregates packages distributed as assets in GitHub Releases from various sub-repositories.
 
-- **Procursus**: rebuilt `iphoneos-arm64` indices for `1500`, `1600`, `1700`.
-- **Bingner**: rewritten indices for `550.58`, `800.00`, `1200.00`, `1443.00`. Only the `Architecture` and `Filename` fields were remapped.
+### Architecture
+
+- **Main Repository (this repo)**: Hosts the index and signatures. It fetches metadata from Releases via GitHub API.
+- **Recipes**: Builds custom packages from source and uploads `.deb` files to Releases.
+- **Patched Legacy**: Patches legacy rootful packages for modern environments and uploads them to Releases.
 
 **Notes:**
 
-1. Only index files (`Packages`, `Release`, etc.) are mirrored. No original `.deb` packages are stored or redistributed. Clients download directly from the official sources.
-2. The `Architecture` field in the indices has been uniformly rewritten to `iphoneos-arm64`, intended for research use with modern package managers. Please evaluate compatibility before installing.
+1. **No `.deb` files are stored directly in this Git repository.** Packages are hosted as GitHub Release assets and downloaded via their CDN.
+2. Legacy packages are patched using `rootless-patcher`. If patching fails or crashes, the original package is distributed. Compatibility is not guaranteed; please evaluate before installing.
 
 ## Copyright
 
