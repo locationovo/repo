@@ -161,3 +161,14 @@ Tag: role::developer
 Author: Theos Team
 Name: Theos
 
+Package: com.locationovo.theos
+Name: Theos
+Version: 1.0.0~202610261539-304e079
+Architecture: iphoneos-arm64
+Description: A cross-platform suite of development tools.
+Author: Theos Team
+Filename: https://github.com/locationovo/recipes/releases/download/theos-v20261026-153927/theos.deb
+Size: 675924
+MD5sum: 38a80a70fca772ed766215bd36fe3e97
+SHA256: 17b523e70890b756f801e8dba8cd58484d9166e4ad23ca6c4e48971f32bacd9e
+
