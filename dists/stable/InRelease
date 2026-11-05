@@ -9,41 +9,41 @@ Codename: ios
 Components: main
 Description: 个人插件源，我的自定义插件和搬运插件，以及Procursus和Bingner的旧版rootful源的镜像
  Personal repo, containing my custom tweaks, ported tweaks, and mirrors of historic rootful Procursus and Bingner repositories.
-Date: Wed, 04 Nov 2026 11:50:00 +0000
+Date: Thu, 05 Nov 2026 11:48:53 +0000
 Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
 MD5Sum:
  8ccd0eecbab8e02dc61f1e3f9cabc3e2 586 main/binary-iphoneos-arm/Packages
- adf657df7e164ee89a73f54603b4790a 418 main/binary-iphoneos-arm/Packages.gz
+ 82c9409c4727bf1dd85f73a7b3c1915c 418 main/binary-iphoneos-arm/Packages.gz
  ad394927501fda7b4181e9d3ed123922 451 main/binary-iphoneos-arm/Packages.bz2
  36fd4768581ac03d80f18c0bc1816aec 6948 main/binary-iphoneos-arm64/Packages
- ad0df8fdbbd4790d727035e29d0115b2 2105 main/binary-iphoneos-arm64/Packages.gz
+ c70e311ab37119549b321fa122db6aa3 2105 main/binary-iphoneos-arm64/Packages.gz
  a399f4dbba0a739ee5e713b373f277f3 2129 main/binary-iphoneos-arm64/Packages.bz2
  02595d0f09de5a5d497a438d91247fbf 6559 main/binary-iphoneos-arm64e/Packages
- 57d0a5a0f4000508d46de70429d11886 1941 main/binary-iphoneos-arm64e/Packages.gz
+ f449bc1e7926c9d35d3c912e4a92cca5 1941 main/binary-iphoneos-arm64e/Packages.gz
  64d0780bfacfbf2a08cb67e7a07a497e 1989 main/binary-iphoneos-arm64e/Packages.bz2
 SHA256:
  674a7e7e1f55e1d6f26a0d9e2750d4995afc1b2673fb6287e013e70331ef901f 586 main/binary-iphoneos-arm/Packages
- ca5df2e9d9d79de058351f3be89f2735d96641882cc342f349aed1539c62894b 418 main/binary-iphoneos-arm/Packages.gz
+ 73fa31dc6222ffb4e85020ed36f74afc66661ba096b79694ed07a40712be52f7 418 main/binary-iphoneos-arm/Packages.gz
  845c8d905ee98a31780ad325bbcca1fe72d4ff5a5111594c735e119a2e8455de 451 main/binary-iphoneos-arm/Packages.bz2
  7deb53e11f3ea479de8c25db61291dce22763be59165a9772446b32285e96934 6948 main/binary-iphoneos-arm64/Packages
- 582604cea5f9c1c931b98290b11d3f192b980a91cf83ec0a940351e986fb5480 2105 main/binary-iphoneos-arm64/Packages.gz
+ 814e4d9f6f072aa3b05ea9521dd75726a3f11f6a8e8f270cde8c600d72c2b435 2105 main/binary-iphoneos-arm64/Packages.gz
  4180208052dee0044bbc40258e949bc3f9711a730e8b17e0b8bdff3a4a840f12 2129 main/binary-iphoneos-arm64/Packages.bz2
  245de79d0117d6f71dbad6f1c7346841529b8f5a08b06c951d45e7c74277eba3 6559 main/binary-iphoneos-arm64e/Packages
- 948a57659e5c169eeff7824c6baa8576a8da67ec5d2d1033b65afaa095e537b7 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 7a7c6e8fdbbbc25491759028c6b5e11dc3db15d52b887ea34de40b0e76dfe273 1941 main/binary-iphoneos-arm64e/Packages.gz
  8524a700dc10acb4ef33d8a23bbd78b27f3a8b70c0a3651dec01b43587f38efc 1989 main/binary-iphoneos-arm64e/Packages.bz2
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEBI6Ar8aSuHx9g1B1LogvfFfsOM0FAmrrG+gACgkQLogvfFfs
-OM28rA/+PVJ4TZ5F93HwT3OSoNw/8RYz+DQ0vlxMTEzlGf4wSwnn9ive54RSZ3AV
-r1Ak5oCVuzYnGY8fhf+SixC931Sig3rs/1bVUCya85TyyCAz4dYm2bacR43WmqvC
-O/tf0gwNFHfaRq2AiDAzCStlbJBgE/AFstDLPhM1LkgQlrVF9I1etMikwZD+Xhua
-KGnW6wCCU9xj5OgW7la7u9v13945/b6N/9OftMKJVfvsnE8otwjqQrPhDIrSJ9cU
-gCDK6chk3pier4oh6SXV/gG+s7ZbFxde61yURuzdSZqUN5xjkk9hHbOKNpurHonh
-IQkh1KmtnpA6zL4sLgxeh6fYEQJcIE/Ye7VGNrFipqQ9N0pll6m7GlzPn+T45Eb+
-BA7/e+cIbfGThq+III+fgt9GkCezJC61urrqT2EvPm6LwaVUO5h1q9HFk1uwifAT
-Q85vDOk/47RZ2PjqSqu1S89W2v/FXnn1QINBWanIIbIB5200qm8m7uGUTBi02pBk
-PUELcpmY+qiOJjUZA7awit1O6qUk8J/3uFTMZgD4kup2aZT52vSLmbnbOJDPsbIW
-IDJHYmaACkdaogVAMXqCgNZlnVOV3pwOY5Sc1F12swsMWmlm37oRDPOJHNxQkbLt
-M3oWDuVTLlZ5unB3cnxTzh5Dr0vuie28OidttnB4VPwzvhT+kFY=
-=Dj8F
+iQIzBAEBCgAdFiEEBI6Ar8aSuHx9g1B1LogvfFfsOM0FAmrsbSUACgkQLogvfFfs
+OM0xHRAAgP2pLCq/f32bSSscrWYjPXWOGX+sEVSFr+eScGQJowdExis/Rg+bG9P+
+cV6BNycJKyX6YKQuVIz0CH9XbNN7h5D8GvCw5pRPrioCjuv2wpgXaSdHtOd8SrPK
+ANZ9fyy7el7K4cnXcWBJzmBjbSCV6+Ie5MU268fGtsUtB9tluA6eJpwXyuHE6c5a
+c/hD8SYbLYLDXi11aifQrvcqsqZNgZIIr4jCRDRFbNwIb6mPDfnmoQqpL8CCF2m6
+q85y0z5c/fL2mivMu/DXtnKVWbiWONCmtw7iH5L9J/lx29LUzTclZz5oYMJH6ZzW
+EhGe42JI8nYKGk6mqGF4GIFoCxjoMFZqO1sHe/8e14UETtmNO4jk3JefekIbXU01
+ulEHj/uuf4rbxggsh24ejOSoCaOlgWT7eFVcncp0TwsCoh7WSRJbyO5Sk7lV25VD
+yqzdwETavTyMMYH5Ggpf8PPXbzoFY4EUY1gIs00dtnXMjwlPp8A+E3GB79gVWWm5
+TSsi3WeMvEQArGQDi/4FhIA2PFw2uE2KP1zBalhHtotD36gxk4ENduPibzIryQ0t
+4GlpWnBbCXeMT9CZu4i4kMO17/ysdKX/4bz8H0vArj3Y3LaZxbxoY8sZ2prawwja
+YI1TXByi4i7glXZBTr+41GVVjiEJ2FoyPFbsG5jo25QqIjBc2Kg=
+=3cgm
 -----END PGP SIGNATURE-----
