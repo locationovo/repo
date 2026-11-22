@@ -9,41 +9,41 @@ Codename: ios
 Components: main
 Description: 个人插件源，我的自定义插件和搬运插件，以及Procursus和Bingner的旧版rootful源的镜像
  Personal repo, containing my custom tweaks, ported tweaks, and mirrors of historic rootful Procursus and Bingner repositories.
-Date: Sat, 21 Nov 2026 12:01:41 +0000
+Date: Sun, 22 Nov 2026 12:14:35 +0000
 Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
 MD5Sum:
  8ccd0eecbab8e02dc61f1e3f9cabc3e2 586 main/binary-iphoneos-arm/Packages
- 7a2bbb0c467ff01f5e64bc95206b8fef 418 main/binary-iphoneos-arm/Packages.gz
+ ed7a21d1127b1a4a1fee902741523050 418 main/binary-iphoneos-arm/Packages.gz
  ad394927501fda7b4181e9d3ed123922 451 main/binary-iphoneos-arm/Packages.bz2
  36fd4768581ac03d80f18c0bc1816aec 6948 main/binary-iphoneos-arm64/Packages
- 7c4cc23fc866786d2ea5a6ae249da4b4 2105 main/binary-iphoneos-arm64/Packages.gz
+ d3ec924380c5246118b3cc8631e99c3e 2105 main/binary-iphoneos-arm64/Packages.gz
  a399f4dbba0a739ee5e713b373f277f3 2129 main/binary-iphoneos-arm64/Packages.bz2
  02595d0f09de5a5d497a438d91247fbf 6559 main/binary-iphoneos-arm64e/Packages
- 5a64f4467fdebb2522008ff63ae834fe 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 25fb05cdc39b26ebb740385eebfd66d3 1941 main/binary-iphoneos-arm64e/Packages.gz
  64d0780bfacfbf2a08cb67e7a07a497e 1989 main/binary-iphoneos-arm64e/Packages.bz2
 SHA256:
  674a7e7e1f55e1d6f26a0d9e2750d4995afc1b2673fb6287e013e70331ef901f 586 main/binary-iphoneos-arm/Packages
- 1aee36f35b8fbe2518f474dcc1504464a8c212c6bcfae913a5124eb1104cac9c 418 main/binary-iphoneos-arm/Packages.gz
+ 02d0e72b2c27cc4e95b8935a9b100c9cb77f312cfe14991e9644b30e45f06337 418 main/binary-iphoneos-arm/Packages.gz
  845c8d905ee98a31780ad325bbcca1fe72d4ff5a5111594c735e119a2e8455de 451 main/binary-iphoneos-arm/Packages.bz2
  7deb53e11f3ea479de8c25db61291dce22763be59165a9772446b32285e96934 6948 main/binary-iphoneos-arm64/Packages
- 54570f9dc5269d730b8ac0cf49f7e11515f0283f343d4a34cf26887da7429381 2105 main/binary-iphoneos-arm64/Packages.gz
+ 20f249fcf5bb49897ee64af81f881d164b59058080113d97f43a1fce2b727d2c 2105 main/binary-iphoneos-arm64/Packages.gz
  4180208052dee0044bbc40258e949bc3f9711a730e8b17e0b8bdff3a4a840f12 2129 main/binary-iphoneos-arm64/Packages.bz2
  245de79d0117d6f71dbad6f1c7346841529b8f5a08b06c951d45e7c74277eba3 6559 main/binary-iphoneos-arm64e/Packages
- d8d811ca7f5e8205246240a76963a3422bf3cf98bcdf017c1ddf12be728582a3 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 6f98fba82121606f992913a49436777ad2b4a98d260e068bb105ccab90e0d84f 1941 main/binary-iphoneos-arm64e/Packages.gz
  8524a700dc10acb4ef33d8a23bbd78b27f3a8b70c0a3651dec01b43587f38efc 1989 main/binary-iphoneos-arm64e/Packages.bz2
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEBI6Ar8aSuHx9g1B1LogvfFfsOM0FAmsBiCYACgkQLogvfFfs
-OM0H0Q/9EnN+epZXFNn9ja2o7ymECBO1vBS1AwGHdOBZT0Mt+6N/XAp4+kw4PkSC
-RKA8s7siS/S9eaqKSdb90S26xxYvWwkiGy5yaVKiOS7z4jvrCmsuu09WODkziYaZ
-WrdQQh3z+slehIJxFmzaUkZDxlpZv3xYWaSm6TS5EJrq425+AQgAhHM4e6zD1jER
-DTyJfiY0k24c+wnpsQ3dU3uf7vQxcd7yvwZdBokbWT8UaL0BUo618yMFouzKeB5S
-IT/5h9aE/Kjf+25X3rLGmIPs8+rCl3Ftz1/pbSXzIlyr8W6gccoNeFBoy3sp1Ebj
-P5hcWaOiAEdYlH2z/oeExZe5Lp8MUhkFedWwXrYj0Z3Qm31zLM5+yDExRQvYiNt1
-7UhSnsv1SnP5KXq66ctRsmGBsbCbPnZnFZN95+NeAERDuRiFkzAqFfvcxhgnciSi
-xADAgib7kbHR6yDl8no/yy4fh+8U1fXxIMQHybQAipkz+BNm0IbUbGeADI2BGI2o
-5Ai7NGa5zO4bbtyc3OfBaJPJIAMaezVy4YzWJBJWgmqJocollzFteuoNDTc7sknU
-9D+MoJ5aDNla5al4HaQ8olawSSx4tJKQJXsoPxxPRtpktHXiZWPkNLHpRHeMbsYD
-WbMtvzQ1WnFnqOsB0wsgrN5VWWPk1zjDYQKDCPyYLQgJSCl2dMU=
-=y338
+iQIzBAEBCgAdFiEEBI6Ar8aSuHx9g1B1LogvfFfsOM0FAmsC3KsACgkQLogvfFfs
+OM0tJQ//XeQvMgQsLewM4AiZzqnLMwDlcrRJrf6UGm/hA+ZkMWGIV1gUB4nHJgej
+FrBgxiqUAT/PVrAh6hoavBBwmaMdylm9JyFjaRcvmMiYUayIMYfnt8li45OG0wL+
+3ZECEjBroM3sfsFNBHl8F39qB+pif4lqK+tlUZfHb74vk9BCxcWyCO1m39M+81rq
+l28Zwyj2LlaI6kRcdy/X/9dL785uLHII7M6dWJj/3zzglpTTpe0GASD8UQ0PPx/c
+eoYVtwAJ7ws4WaHfQd2ROTjv8HGZf8VHXWH2GNI9W3LoXzTvRSUEJixTnvOv9U/e
+BlcGEiLjyQK0zt9jx8NP4UwU/z+HjUqlZkAl7cGU7KftIwr8+mse+YW+O/pWYhru
+zK+g5u2WHUhbrErdu/3MNSr/eLtbPCG0BQrfpYEyBa9ZAE9iJzNB4Vlyv99akEve
+VUm6LKeSEnTFRdL5hwIDbejd0ZUw+IrQYpYEdUaRY1iCC6938GgA8i0kkUO5Zzk9
+PnDQiXhGL0FAZUokOeGTgf/lya0J96icimsoHOrnLOuJZnjadyTKYbmqFChsL/Pi
+5Ewqf3rfSyyAqn8tLtm3g4x+z0g4OZ9LAfhHZ8MGv9tXzYWW00uHKUUzOrWGxzPo
+9guRw0eoAa3XZuJDWAdf3IHHWlOtbRCdZL8vqBIK/bw37qSxzCE=
+=21Jd
 -----END PGP SIGNATURE-----
