@@ -6,25 +6,25 @@ Codename: ios
 Components: main
 Description: 个人插件源，我的自定义插件和搬运插件，以及Procursus和Bingner的旧版rootful源的镜像
  Personal repo, containing my custom tweaks, ported tweaks, and mirrors of historic rootful Procursus and Bingner repositories.
-Date: Tue, 24 Nov 2026 14:30:06 +0000
+Date: Wed, 25 Nov 2026 13:50:02 +0000
 Architectures: iphoneos-arm iphoneos-arm64 iphoneos-arm64e
 MD5Sum:
  8ccd0eecbab8e02dc61f1e3f9cabc3e2 586 main/binary-iphoneos-arm/Packages
- 3009d84907da4a59f1225cbd614ce25b 418 main/binary-iphoneos-arm/Packages.gz
+ f4a35710843b94a8f32bb66a7095e44b 418 main/binary-iphoneos-arm/Packages.gz
  ad394927501fda7b4181e9d3ed123922 451 main/binary-iphoneos-arm/Packages.bz2
  36fd4768581ac03d80f18c0bc1816aec 6948 main/binary-iphoneos-arm64/Packages
- 8813551f102c9b20c75a6674c4d19de1 2105 main/binary-iphoneos-arm64/Packages.gz
+ 1b0f4466e3d88f5e50f4ad67e2e1cdcf 2105 main/binary-iphoneos-arm64/Packages.gz
  a399f4dbba0a739ee5e713b373f277f3 2129 main/binary-iphoneos-arm64/Packages.bz2
  02595d0f09de5a5d497a438d91247fbf 6559 main/binary-iphoneos-arm64e/Packages
- 50e3c44c1aa80619ced8a57a4cac8032 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 54e660172f9b5ea743829d32d4f57f62 1941 main/binary-iphoneos-arm64e/Packages.gz
  64d0780bfacfbf2a08cb67e7a07a497e 1989 main/binary-iphoneos-arm64e/Packages.bz2
 SHA256:
  674a7e7e1f55e1d6f26a0d9e2750d4995afc1b2673fb6287e013e70331ef901f 586 main/binary-iphoneos-arm/Packages
- 8947fab401633bd5439282d58ed3e3f3d2dc638eb35881f9630dfef6cd9a9cb5 418 main/binary-iphoneos-arm/Packages.gz
+ f1dc4e62aaf069566efdb658cf7c4dc03a31654fdf13e0f87b082b0ec214e87a 418 main/binary-iphoneos-arm/Packages.gz
  845c8d905ee98a31780ad325bbcca1fe72d4ff5a5111594c735e119a2e8455de 451 main/binary-iphoneos-arm/Packages.bz2
  7deb53e11f3ea479de8c25db61291dce22763be59165a9772446b32285e96934 6948 main/binary-iphoneos-arm64/Packages
- 77e91b4d773ebea2dca34caa4ac5dc942548b6e630ead601df9145ad50cc8856 2105 main/binary-iphoneos-arm64/Packages.gz
+ 5a3607b84645f2c157f339c276ecb44bcda7890600ad84f26c4f31477b06bc24 2105 main/binary-iphoneos-arm64/Packages.gz
  4180208052dee0044bbc40258e949bc3f9711a730e8b17e0b8bdff3a4a840f12 2129 main/binary-iphoneos-arm64/Packages.bz2
  245de79d0117d6f71dbad6f1c7346841529b8f5a08b06c951d45e7c74277eba3 6559 main/binary-iphoneos-arm64e/Packages
- af4a8b181a58646b8b0b2ae33cac08c8f4958f585eb72340ce77c7c04879e858 1941 main/binary-iphoneos-arm64e/Packages.gz
+ 2ecf223031591d40c69e844dc8bb2c9874330f056dab688c55f75a616fb90e12 1941 main/binary-iphoneos-arm64e/Packages.gz
  8524a700dc10acb4ef33d8a23bbd78b27f3a8b70c0a3651dec01b43587f38efc 1989 main/binary-iphoneos-arm64e/Packages.bz2
